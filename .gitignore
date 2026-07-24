@@ -1,0 +1,49 @@
+# Codegraph index (should be gitignored per AGENTSv2.md)
+.codegraph/*.db
+
+# Omo continuation state
+.omo/
+
+# Build artifacts
+target/
+*.class
+*.jar
+*.war
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.project
+.classpath
+
+# Logs
+*.log
+logs/
+
+# Test artifacts
+allure-results/
+surefire-reports/
+test-output/
+
+# Local config
+*.local.properties
+local.properties
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
