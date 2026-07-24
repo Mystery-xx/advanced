@@ -47,3 +47,6 @@ Thumbs.db
 *.bak
 *.swp
 *~
+
+# Documents
+text.md
