@@ -1,0 +1,16 @@
+package com.example.paymentservice.dto;
+
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import lombok.Data;
+
+import java.math.BigDecimal;
+
+@Data
+public class RefundRequest {
+    @NotNull(message = "Refund amount is required")
+    @DecimalMin(value = "0.01", message = "Refund amount must be greater than 0")
+    private BigDecimal amount;
+
+    private String reason;
+}

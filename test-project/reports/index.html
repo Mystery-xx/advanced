@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .report-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .report-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+        }
+        
+        .report-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .report-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .status {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .status-green {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        
+        .status-red {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-green .status-dot {
+            background: #48bb78;
+        }
+        
+        .status-red .status-dot {
+            background: #f56565;
+        }
+        
+        .report-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: opacity 0.2s ease;
+        }
+        
+        .report-link:hover {
+            opacity: 0.9;
+        }
+        
+        .report-description {
+            color: #718096;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .last-updated {
+            text-align: center;
+            color: rgba(255,255,255,0.9);
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+        
+        .level-badge {
+            display: inline-block;
+            background: #edf2f7;
+            color: #4a5568;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Testing Dashboard</h1>
+        
+        <div class="report-card">
+            <span class="level-badge">Level 1</span>
+            <div class="report-header">
+                <h2 class="report-title">Allure Report</h2>
+                <span class="status status-green">
+                    <span class="status-dot"></span>
+                    Available
+                </span>
+            </div>
+            <p class="report-description">
+                Comprehensive test execution reports with detailed analytics, trends, and test case documentation.
+            </p>
+            <a href="../target/allure-results/" class="report-link">Open Allure Report</a>
+        </div>
+        
+        <div class="report-card">
+            <span class="level-badge">Level 2</span>
+            <div class="report-header">
+                <h2 class="report-title">Playwright Report</h2>
+                <span class="status status-green">
+                    <span class="status-dot"></span>
+                    Available
+                </span>
+            </div>
+            <p class="report-description">
+                End-to-end test results with screenshots, traces, and video recordings for debugging.
+            </p>
+            <a href="../playwright-report/" class="report-link">Open Playwright Report</a>
+        </div>
+        
+        <p class="last-updated">
+            Last updated: <span id="timestamp"></span>
+        </p>
+    </div>
+    
+    <script>
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+    </script>
+</body>
+</html>
