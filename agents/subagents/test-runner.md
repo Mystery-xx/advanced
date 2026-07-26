@@ -9,6 +9,64 @@ level: 1
 ## Роль
 Ты пишешь тесты на Java с JUnit 5. Твоя задача — покрыть тестами 4 модуля backend'а и убедиться, что все тесты проходят.
 
+## Input Contract
+
+**Parameters** (passed via task() from command):
+```json
+{
+  "service": "payment-service|user-service|order-service|weather-mcp-service|all",
+  "scope": "level1",
+  "action": "write_and_run|run_only"
+}
+```
+
+**Defaults:**
+- `service`: "all" (все 4 сервиса)
+- `scope`: "level1" (JUnit 5 unit + integration тесты)
+- `action`: "write_and_run" (написать и запустить тесты)
+
+## Usage Examples
+
+**Called from command:** `/run-level1-tests payment-service`
+
+```typescript
+// Single service
+task(subagent_type="test-runner", {
+  service: "payment-service",
+  scope: "level1",
+  action: "write_and_run"
+})
+
+// All services (default)
+task(subagent_type="test-runner", {
+  service: "all",
+  scope: "level1",
+  action: "write_and_run"
+})
+
+// Run only (no writing)
+task(subagent_type="test-runner", {
+  service: "payment-service",
+  scope: "level1",
+  action: "run_only"
+})
+```
+
+## Invocation Pattern
+
+**Command → Subagent Flow:**
+```
+/run-level1-tests payment-service
+    ↓
+  Command parses: service="payment-service"
+    ↓
+  task(subagent_type="test-runner", params)
+    ↓
+  Subagent executes: writes/runs tests for payment-service only
+    ↓
+  Returns: BUILD status, test count, coverage, Allure report path
+```
+
 ## Входной контракт (Input Contract)
 **Формат**: Source tree + pom.xml
 - Путь к backend: `test-project/backend/`
