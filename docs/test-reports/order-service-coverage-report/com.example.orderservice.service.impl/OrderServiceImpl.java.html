@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Order Service</a> &gt; <a href="index.source.html" class="el_package">com.example.orderservice.service.impl</a> &gt; <span class="el_source">OrderServiceImpl.java</span></div><h1>OrderServiceImpl.java</h1><pre class="source lang-java linenums">package com.example.orderservice.service.impl;
+
+import com.example.orderservice.dto.CreateOrderRequest;
+import com.example.orderservice.dto.OrderDTO;
+import com.example.orderservice.entity.Order;
+import com.example.orderservice.repository.OrderRepository;
+import com.example.orderservice.service.OrderService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+<span class="fc" id="L20">@RequiredArgsConstructor</span>
+<span class="fc" id="L21">@Slf4j</span>
+@Transactional(readOnly = true)
+public class OrderServiceImpl implements OrderService {
+
+    private final OrderRepository orderRepository;
+
+    @Override
+    @Transactional
+    public OrderDTO createOrder(CreateOrderRequest request) {
+<span class="fc" id="L30">        log.info(&quot;Creating order for userId: {}&quot;, request.getUserId());</span>
+
+<span class="fc" id="L32">        Order order = Order.builder()</span>
+<span class="fc" id="L33">            .userId(request.getUserId())</span>
+<span class="fc" id="L34">            .totalAmount(request.getTotalAmount())</span>
+<span class="fc" id="L35">            .shippingAddress(request.getShippingAddress())</span>
+<span class="fc" id="L36">            .items(request.getItems())</span>
+<span class="fc" id="L37">            .status(Order.OrderStatus.PENDING)</span>
+<span class="fc" id="L38">            .build();</span>
+
+<span class="fc" id="L40">        Order savedOrder = orderRepository.save(order);</span>
+<span class="fc" id="L41">        log.info(&quot;Order created with id: {}&quot;, savedOrder.getId());</span>
+
+<span class="fc" id="L43">        return OrderDTO.fromEntity(savedOrder);</span>
+    }
+
+    @Override
+    public Optional&lt;OrderDTO&gt; getOrderById(Long id) {
+<span class="fc" id="L48">        log.debug(&quot;Getting order by id: {}&quot;, id);</span>
+<span class="fc" id="L49">        return orderRepository.findById(id).map(OrderDTO::fromEntity);</span>
+    }
+
+    @Override
+    public Page&lt;OrderDTO&gt; getOrdersByUserId(String userId, Pageable pageable) {
+<span class="fc" id="L54">        log.debug(&quot;Getting orders by userId: {}&quot;, userId);</span>
+<span class="fc" id="L55">        return orderRepository.findByUserId(userId, pageable).map(OrderDTO::fromEntity);</span>
+    }
+
+    @Override
+    public Page&lt;OrderDTO&gt; getAllOrders(Pageable pageable) {
+<span class="fc" id="L60">        log.debug(&quot;Getting all orders with pagination: {}&quot;, pageable);</span>
+<span class="fc" id="L61">        return orderRepository.findAll(pageable).map(OrderDTO::fromEntity);</span>
+    }
+
+    @Override
+    @Transactional
+    public OrderDTO updateOrderStatus(Long id, String status) {
+<span class="fc" id="L67">        log.info(&quot;Updating order status for id: {} to {}&quot;, id, status);</span>
+
+<span class="fc" id="L69">        Order order = orderRepository.findById(id)</span>
+<span class="fc" id="L70">            .orElseThrow(() -&gt; new IllegalArgumentException(&quot;Order not found with id: &quot; + id));</span>
+
+        try {
+<span class="fc" id="L73">            Order.OrderStatus newStatus = Order.OrderStatus.valueOf(status.toUpperCase());</span>
+<span class="fc" id="L74">            order.setStatus(newStatus);</span>
+<span class="fc" id="L75">            Order updatedOrder = orderRepository.save(order);</span>
+<span class="fc" id="L76">            log.info(&quot;Order status updated to {}&quot;, newStatus);</span>
+<span class="fc" id="L77">            return OrderDTO.fromEntity(updatedOrder);</span>
+<span class="fc" id="L78">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L79">            throw new IllegalArgumentException(&quot;Invalid order status: &quot; + status +</span>
+<span class="fc" id="L80">                &quot;. Valid statuses: &quot; + Arrays.toString(Order.OrderStatus.values()));</span>
+        }
+    }
+
+    @Override
+    @Transactional
+    public OrderDTO cancelOrder(Long id) {
+<span class="fc" id="L87">        log.info(&quot;Cancelling order with id: {}&quot;, id);</span>
+
+<span class="fc" id="L89">        Order order = orderRepository.findById(id)</span>
+<span class="fc" id="L90">            .orElseThrow(() -&gt; new IllegalArgumentException(&quot;Order not found with id: &quot; + id));</span>
+
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        if (order.getStatus() == Order.OrderStatus.CANCELLED) {</span>
+<span class="fc" id="L93">            throw new IllegalArgumentException(&quot;Order is already cancelled&quot;);</span>
+        }
+
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        if (order.getStatus() == Order.OrderStatus.SHIPPED ||</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">            order.getStatus() == Order.OrderStatus.DELIVERED) {</span>
+<span class="fc" id="L98">            throw new IllegalArgumentException(&quot;Cannot cancel order that has been shipped&quot;);</span>
+        }
+
+<span class="fc" id="L101">        order.setStatus(Order.OrderStatus.CANCELLED);</span>
+<span class="fc" id="L102">        Order cancelledOrder = orderRepository.save(order);</span>
+<span class="fc" id="L103">        log.info(&quot;Order cancelled successfully&quot;);</span>
+
+<span class="fc" id="L105">        return OrderDTO.fromEntity(cancelledOrder);</span>
+    }
+
+    @Override
+    public Page&lt;OrderDTO&gt; getOrdersByStatus(String status, Pageable pageable) {
+<span class="fc" id="L110">        log.debug(&quot;Getting orders by status: {}&quot;, status);</span>
+        try {
+<span class="fc" id="L112">            Order.OrderStatus orderStatus = Order.OrderStatus.valueOf(status.toUpperCase());</span>
+<span class="fc" id="L113">            return orderRepository.findByStatus(orderStatus, pageable).map(OrderDTO::fromEntity);</span>
+<span class="fc" id="L114">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L115">            throw new IllegalArgumentException(&quot;Invalid order status: &quot; + status);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

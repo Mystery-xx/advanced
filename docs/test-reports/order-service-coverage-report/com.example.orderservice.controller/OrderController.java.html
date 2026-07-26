@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Order Service</a> &gt; <a href="index.source.html" class="el_package">com.example.orderservice.controller</a> &gt; <span class="el_source">OrderController.java</span></div><h1>OrderController.java</h1><pre class="source lang-java linenums">package com.example.orderservice.controller;
+
+import com.example.orderservice.dto.CreateOrderRequest;
+import com.example.orderservice.dto.OrderDTO;
+import com.example.orderservice.dto.UpdateStatusRequest;
+import com.example.orderservice.service.OrderService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import javax.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping(&quot;/api/orders&quot;)
+<span class="fc" id="L23">@RequiredArgsConstructor</span>
+<span class="fc" id="L24">@Slf4j</span>
+@Tag(name = &quot;Order Management&quot;, description = &quot;APIs for managing orders&quot;)
+public class OrderController {
+
+    private final OrderService orderService;
+
+    @PostMapping
+    @Operation(summary = &quot;Create a new order&quot;, description = &quot;Creates a new order with the provided details&quot;)
+    @PreAuthorize(&quot;hasAnyRole('ADMIN', 'USER')&quot;)
+    public ResponseEntity&lt;OrderDTO&gt; createOrder(@Valid @RequestBody CreateOrderRequest request) {
+<span class="fc" id="L34">        log.info(&quot;POST /api/orders - Creating order for userId: {}&quot;, request.getUserId());</span>
+<span class="fc" id="L35">        OrderDTO createdOrder = orderService.createOrder(request);</span>
+<span class="fc" id="L36">        return ResponseEntity.status(HttpStatus.CREATED).body(createdOrder);</span>
+    }
+
+    @GetMapping(&quot;/{id}&quot;)
+    @Operation(summary = &quot;Get order by ID&quot;, description = &quot;Retrieves an order by its unique ID&quot;)
+    @PreAuthorize(&quot;hasAnyRole('ADMIN', 'USER')&quot;)
+    public ResponseEntity&lt;OrderDTO&gt; getOrderById(
+            @Parameter(description = &quot;Order ID&quot;) @PathVariable Long id) {
+<span class="fc" id="L44">        log.info(&quot;GET /api/orders/{} - Retrieving order&quot;, id);</span>
+<span class="fc" id="L45">        return orderService.getOrderById(id)</span>
+<span class="fc" id="L46">            .map(ResponseEntity::ok)</span>
+<span class="fc" id="L47">            .orElse(ResponseEntity.notFound().build());</span>
+    }
+
+    @GetMapping
+    @Operation(summary = &quot;Get all orders&quot;, description = &quot;Retrieves all orders with pagination support&quot;)
+    @PreAuthorize(&quot;hasRole('ADMIN')&quot;)
+    public ResponseEntity&lt;Page&lt;OrderDTO&gt;&gt; getAllOrders(
+            @PageableDefault(size = 20) Pageable pageable) {
+<span class="fc" id="L55">        log.info(&quot;GET /api/orders - Retrieving all orders&quot;);</span>
+<span class="fc" id="L56">        return ResponseEntity.ok(orderService.getAllOrders(pageable));</span>
+    }
+
+    @GetMapping(&quot;/user/{userId}&quot;)
+    @Operation(summary = &quot;Get orders by user ID&quot;, description = &quot;Retrieves orders for a specific user&quot;)
+    @PreAuthorize(&quot;hasAnyRole('ADMIN', 'USER')&quot;)
+    public ResponseEntity&lt;Page&lt;OrderDTO&gt;&gt; getOrdersByUserId(
+            @Parameter(description = &quot;User ID&quot;) @PathVariable String userId,
+            @PageableDefault(size = 20) Pageable pageable) {
+<span class="fc" id="L65">        log.info(&quot;GET /api/orders/user/{} - Retrieving orders by user&quot;, userId);</span>
+<span class="fc" id="L66">        return ResponseEntity.ok(orderService.getOrdersByUserId(userId, pageable));</span>
+    }
+
+    @PutMapping(&quot;/{id}/status&quot;)
+    @Operation(summary = &quot;Update order status&quot;, description = &quot;Updates the status of an existing order&quot;)
+    @PreAuthorize(&quot;hasRole('ADMIN')&quot;)
+    public ResponseEntity&lt;OrderDTO&gt; updateOrderStatus(
+            @Parameter(description = &quot;Order ID&quot;) @PathVariable Long id,
+            @Valid @RequestBody UpdateStatusRequest request) {
+<span class="fc" id="L75">        log.info(&quot;PUT /api/orders/{}/status - Updating order status to {}&quot;, id, request.getStatus());</span>
+        try {
+<span class="fc" id="L77">            OrderDTO updatedOrder = orderService.updateOrderStatus(id, request.getStatus());</span>
+<span class="fc" id="L78">            return ResponseEntity.ok(updatedOrder);</span>
+<span class="fc" id="L79">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L80">            return ResponseEntity.badRequest().build();</span>
+        }
+    }
+
+    @PostMapping(&quot;/{id}/cancel&quot;)
+    @Operation(summary = &quot;Cancel order&quot;, description = &quot;Cancels an existing order&quot;)
+    @PreAuthorize(&quot;hasAnyRole('ADMIN', 'USER')&quot;)
+    public ResponseEntity&lt;OrderDTO&gt; cancelOrder(
+            @Parameter(description = &quot;Order ID&quot;) @PathVariable Long id) {
+<span class="fc" id="L89">        log.info(&quot;POST /api/orders/{}/cancel - Cancelling order&quot;, id);</span>
+        try {
+<span class="fc" id="L91">            OrderDTO cancelledOrder = orderService.cancelOrder(id);</span>
+<span class="fc" id="L92">            return ResponseEntity.ok(cancelledOrder);</span>
+<span class="fc" id="L93">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L94">            return ResponseEntity.badRequest().build();</span>
+        }
+    }
+
+    @GetMapping(&quot;/status/{status}&quot;)
+    @Operation(summary = &quot;Get orders by status&quot;, description = &quot;Retrieves orders filtered by status&quot;)
+    @PreAuthorize(&quot;hasRole('ADMIN')&quot;)
+    public ResponseEntity&lt;Page&lt;OrderDTO&gt;&gt; getOrdersByStatus(
+            @Parameter(description = &quot;Order status&quot;) @PathVariable String status,
+            @PageableDefault(size = 20) Pageable pageable) {
+<span class="fc" id="L104">        log.info(&quot;GET /api/orders/status/{} - Retrieving orders by status&quot;, status);</span>
+        try {
+<span class="fc" id="L106">            return ResponseEntity.ok(orderService.getOrdersByStatus(status, pageable));</span>
+<span class="fc" id="L107">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L108">            return ResponseEntity.badRequest().build();</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -4,7 +4,9 @@
 
 **Команда:** `/run-level2-journeys`
 
-**Описание:** Запуск Level 2 UI-тестирования с использованием subagent `ui-tester` и Playwright MCP.
+**Описание:** Запуск Level 2 UI-тестирования с использованием Playwright MCP — выполняет тесты напрямую.
+
+**Делегируй через `task(subagent_type="ui-tester", ...)` — не выполняй тесты напрямую.**
 
 ## Usage
 
@@ -17,6 +19,38 @@
 
 # Запуск с кастомным URL frontend
 /run-level2-journeys --url=http://localhost:3001
+```
+
+## Delegation Pattern
+
+**Эта команда — обёртка для сабагента `ui-tester`.**
+
+### Execution Flow
+
+1. **Parse arguments** from `$ARGUMENTS`:
+   - Feature file: `login.feature` (default: "all")
+   - Frontend URL: `--url=http://localhost:3001` (default: "http://localhost:3000")
+
+2. **Delegate to subagent** via `task()`:
+```typescript
+task(subagent_type="ui-tester", {
+  feature: "<parsed-feature-or-all>",
+  url: "<parsed-url-or-default>"
+})
+```
+
+3. **Forward result** to user:
+   - Scenario execution results (per step)
+   - HTML report path
+   - Screenshot locations
+   - summary.html path
+
+### Usage
+
+```bash
+/run-level2-journeys                           # Все .feature файлы
+/run-level2-journeys --feature=.feature   # Только login.feature
+/run-level2-journeys --url=http://localhost:3001  # Кастомный URL
 ```
 
 ## Prerequisites
@@ -39,59 +73,27 @@
    - Файлы `journeys/features/*.feature` существуют
    - Синтаксис Gherkin валиден
 
-## Execution Flow
+## Execution
 
-1. **Pre-flight checks:**
-   - Проверка доступности frontend (`curl localhost:3000`)
-   - Проверка Playwright MCP (версия сервера)
-   - Валидация `.feature` файлов
+Эта команда делегирует работу сабагенту `ui-tester`. Не выполняй тесты напрямую.
 
-2. **Запуск subagent:**
-   ```
-   subagent: ui-tester
-   input: journeys/features/*.feature + localhost:3000
-   output: playwright-report/ + screenshots/ + summary.html
-   ```
-
-3. **Мониторинг:**
-   - Отслеживание прогресса выполнения
-   - Логирование ошибок с retry-попытками
-
-4. **Post-processing:**
-   - Генерация сводного отчёта
-   - Архивация скриншотов
-   - Вывод результатов в консоль
-
-## Output
-
-**Артефакты после выполнения:**
-
-```
-.omо/evidence/task-5-testing-assignment/
-├── playwright-report/
-│   └── index.html          # Playwright HTML report
-├── screenshots/
-│   ├── step-01-*.png       # Скриншоты шагов
-│   └── ...
-└── summary.html            # Сводный отчёт
-```
-
-**Консольный вывод:**
+1. Извлеки аргументы из `$ARGUMENTS`
+2. Вызови `task(subagent_type="ui-tester", params)`
+3. Дождись результата от сабагента
+4. Передай отчёт пользователю в формате:
 ```
 ✓ Scenario: User login with valid credentials
   ✓ Step 1: Navigate to login page
   ✓ Step 2: Fill email field
-  ✓ Step 3: Fill password field
-  ✓ Step 4: Click login button
-  ✓ Step 5: Verify dashboard visible
-
-✗ Scenario: Admin role navigation
-  ✓ Step 1: Navigate to login page
-  ✗ Step 2: Fill email field (retry: 2/2)
   ...
 
 Report: .omo/evidence/task-5-testing-assignment/summary.html
 ```
+
+## Ограничения:
+- НЕ пропускай шаги сценариев
+- НЕ игнорируй failing тесты
+- НЕ делай скриншоты без явного шага в сценарии
 
 ## Error Scenarios
 
@@ -116,7 +118,6 @@ Solution: Fix syntax error before running tests
 ## Integration
 
 **Связанные компоненты:**
-- **Subagent:** `ui-tester` (`.opencode/agents/subagents/ui-tester.md`)
 - **MCP Config:** `.opencode/mcp.json` (сервер `playwright`)
 - **Сценарии:** `journeys/features/*.feature`
 - **Evidence:** `.omo/evidence/task-5-testing-assignment/`
@@ -129,7 +130,7 @@ Solution: Fix syntax error before running tests
 # 1. Запустить frontend
 cd test-project/frontend && npm run dev
 
-# 2. Запустить тесты
+# 2. Запустить тесты (команда делегирует сабагенту ui-tester)
 /run-level2-journeys
 
 # 3. Открыть отчёт

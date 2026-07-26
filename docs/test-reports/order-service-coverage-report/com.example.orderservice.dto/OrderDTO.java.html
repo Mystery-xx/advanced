@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderDTO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Order Service</a> &gt; <a href="index.source.html" class="el_package">com.example.orderservice.dto</a> &gt; <span class="el_source">OrderDTO.java</span></div><h1>OrderDTO.java</h1><pre class="source lang-java linenums">package com.example.orderservice.dto;
+
+import com.example.orderservice.entity.Order;
+import lombok.Builder;
+import lombok.Data;
+
+import java.math.BigDecimal;
+import java.time.Instant;
+
+<span class="nc bnc" id="L10" title="All 70 branches missed.">@Data</span>
+<span class="pc" id="L11">@Builder</span>
+public class OrderDTO {
+<span class="fc" id="L13">    private Long id;</span>
+<span class="fc" id="L14">    private String userId;</span>
+<span class="fc" id="L15">    private BigDecimal totalAmount;</span>
+<span class="fc" id="L16">    private String status;</span>
+<span class="fc" id="L17">    private String shippingAddress;</span>
+<span class="fc" id="L18">    private String items;</span>
+<span class="fc" id="L19">    private Instant createdAt;</span>
+<span class="fc" id="L20">    private Instant updatedAt;</span>
+
+    public static OrderDTO fromEntity(Order order) {
+<span class="fc" id="L23">        return OrderDTO.builder()</span>
+<span class="fc" id="L24">            .id(order.getId())</span>
+<span class="fc" id="L25">            .userId(order.getUserId())</span>
+<span class="fc" id="L26">            .totalAmount(order.getTotalAmount())</span>
+<span class="fc" id="L27">            .status(order.getStatus().name())</span>
+<span class="fc" id="L28">            .shippingAddress(order.getShippingAddress())</span>
+<span class="fc" id="L29">            .items(order.getItems())</span>
+<span class="fc" id="L30">            .createdAt(order.getCreatedAt())</span>
+<span class="fc" id="L31">            .updatedAt(order.getUpdatedAt())</span>
+<span class="fc" id="L32">            .build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

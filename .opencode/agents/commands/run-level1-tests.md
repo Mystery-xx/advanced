@@ -1,52 +1,69 @@
 ---
-description: Запуск Level 1 тестов (unit + integration) через subagent test-runner
-agent: test-runner
+description: Запуск Level 1 тестов (unit + integration) — делегирует сабагенту test-runner
+agent: run-level1-tests
 ---
 
 **Запрос пользователя**: $ARGUMENTS
 
 **Триггер**: Пользователь просит запустить Level 1 тесты, покрыть тестами сервисы, или "протестировать backend".
 
-## Инструкция
+## Delegation Pattern
 
-### 1. ПЕРЕД запуском
-- Убедись, что backend скомпилирован: `cd test-project/backend && mvn clean compile`
-- Проверь, что pom.xml содержит зависимости для тестирования (JUnit 5, Mockito, Allure)
+**Эта команда — обёртка для сабагента test-runner.**
 
-### 2. ЗАПУСК
-Вызови subagent `test-runner` с контекстом:
+### Execution Flow
+
+1. **Parse arguments** from `$ARGUMENTS`:
+   - Service name(s): `payment-service`, `user-service`, etc. (default: "all")
+   - Flags: `--action=run_only` (optional)
+
+2. **Delegate to subagent** via `task()`:
+```typescript
+task(subagent_type="test-runner",
+  service: "<parsed-service-or>",
+  scope: "level1",
+  action: "<write_and_run|run_only>"
+})
 ```
-Источник: test-project/backend/
-Модули: user-service, order-service, weather-mcp-service, payment-service
-Задача: Покрыть тестами и запустить Level 1 тесты
+
+3. **Forward result** to user:
+   - BUILD status (SUCCESS/FAILED)
+   - Test count (X/Y passed)
+   - Coverage percentage
+   - Allure report path
+
+### Usage
+
+```bash
+/run-level1-tests                           # Все 4 сервиса
+/run-level1-tests payment-service           # Только payment-service
+/run-level1-tests payment-service user-service  # Несколько сервисов
+/run-level1-tests --action=run_only payment-service  # Только запуск
 ```
 
-### 3. ОЖИДАЙ результат
-Subagent вернёт:
-- BUILD status (SUCCESS/FAILED)
-- Количество пройденных тестов
-- Allure отчёт в `target/allure-results/`
-- Coverage отчёт в `coverage-report/`
+## Execution
 
-### 4. ЕСЛИ FAILED
-- Читай отчёт subagent'а
-- Предложи пользователю:
-  - Запустить повторно (если flaky test)
-  - Исправить код (если баг)
-  - Исправить тест (если ошибка в тесте)
+Эта команда делегирует работу сабагенту `test-runner`. Не выполняй тесты напрямую.
 
-### 5. ОТЧЁТ пользователю
+1. Извлеки аргументы из `$ARGUMENTS`
+2. Вызови `task(subagent_type="test-runner", params)`
+3. Дождись результата от сабагента
+4. Передай отчёт пользователю в формате:
 ```
 Level 1 тесты завершены:
-- BUILD: SUCCESS
-- Тестов: 48/48
-- Покрытие: 72%
+- BUILD: SUCCESS/FAILED
+- Тестов: X/Y
+- Покрытие: Z%
 - Allure: target/allure-results/
-
-Следующий шаг: Level 2 (E2E) или Level 3 (нагрузочные)
 ```
 
-## Запрещено
-- НЕ запускай тесты без понимания структуры проекта
+## Ограничения:
+- НЕ пиши интеграционные тесты (только unit)
 - НЕ игнорируй failing тесты
 - НЕ переходи к Level 2/3 пока Level 1 не зелёный
+- НЕ меняй production код (только тесты)
+
+## Запрещено:
+- ❌ Подавлять ошибки в тестах
+- ❌ Удалять failing-тесты чтобы "прошли"
+- ❌ Запускать тесты без понимания структуры проекта

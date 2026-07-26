@@ -6,15 +6,61 @@
 
 ## Input Contract
 
-**Формат входа:**
-- **Сценарии**: `journeys/features/*.feature` (Gherkin синтаксис)
-- **Frontend URL**: `http://localhost:3000` (frontend должен быть запущен)
-- **Конфиг Playwright MCP**: `.opencode/mcp.json` (сервер `playwright`)
+**Parameters** (passed via task() from command):
+```json
+{
+  "feature": "login.feature|all",
+  "url": "http://localhost:3000"
+}
+```
+
+**Defaults:**
+- `feature`: `"all"` (все `.feature` файлы из `journeys/features/`)
+- `url`: `"http://localhost:3000"` (frontend URL)
 
 **Требования к окружению:**
 1. Frontend запущен на `localhost:3000`
 2. Playwright MCP сервер активен (порт 8931)
 3. Браузер Chromium доступен (headless режим)
+
+## Usage Examples
+
+**Called from command:** `/run-level2-journeys --feature=login.feature`
+
+```typescript
+// Single feature file
+task(subagent_type="ui-tester", {
+  feature: "login.feature",
+  url: "http://localhost:3000"
+})
+
+// All features (default)
+task(subagent_type="ui-tester", {
+  feature: "all",
+  url: "http://localhost:3000"
+})
+
+// Custom frontend URL
+task(subagent_type="ui-tester", {
+  feature: "all",
+  url: "http://localhost:3001"
+})
+```
+
+## Invocation Pattern
+
+**Command → Subagent Flow:**
+```
+/run-level2-journeys --feature=login.feature
+    ↓
+  Command parses: feature="login.feature", url="http://localhost:3000"
+    ↓
+  task(subagent_type="ui-tester", params)
+    ↓
+  Subagent executes: reads login.feature, runs steps via Playwright MCP
+    ↓
+  Returns: HTML report, screenshots, summary.html path
+```
 
 ## Output Contract
 

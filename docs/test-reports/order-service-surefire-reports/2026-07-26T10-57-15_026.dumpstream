@@ -1,0 +1,1311 @@
+# Created at 2026-07-26T10:57:23.798
+WARNING: An illegal reflective access operation has occurred
+
+# Created at 2026-07-26T10:57:23.804
+WARNING: Illegal reflective access using Lookup on org.aspectj.weaver.loadtime.ClassLoaderWeavingAdaptor (file:/home/solas/.m2/repository/org/aspectj/aspectjweaver/1.9.7/aspectjweaver-1.9.7.jar) to class java.lang.ClassLoader
+
+# Created at 2026-07-26T10:57:23.813
+WARNING: Please consider reporting this to the maintainers of org.aspectj.weaver.loadtime.ClassLoaderWeavingAdaptor
+
+# Created at 2026-07-26T10:57:23.818
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+
+# Created at 2026-07-26T10:57:23.820
+WARNING: All illegal access operations will be denied in a future release
+
+# Created at 2026-07-26T10:57:24.293
+[AppClassLoader@3d4eac69] abort trouble in: 
+
+# Created at 2026-07-26T10:57:24.296
+class org.springframework.boot.jdbc.DataSourceBuilder$ComboPooledDataSourceProperties extends org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperties:
+
+# Created at 2026-07-26T10:57:24.299
+  void <init>():
+
+# Created at 2026-07-26T10:57:24.302
+                    ALOAD_0     // Lorg/springframework/boot/jdbc/DataSourceBuilder$ComboPooledDataSourceProperties; this   (line 662)
+
+# Created at 2026-07-26T10:57:24.307
+                    INVOKESPECIAL org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperties.<init> ()V
+
+# Created at 2026-07-26T10:57:24.310
+    constructor-execution(void org.springframework.boot.jdbc.DataSourceBuilder$ComboPooledDataSourceProperties.<init>())
+
+# Created at 2026-07-26T10:57:24.313
+    |               ALOAD_0     // Lorg/springframework/boot/jdbc/DataSourceBuilder$ComboPooledDataSourceProperties; this   (line 663)
+
+# Created at 2026-07-26T10:57:24.317
+    |               GETSTATIC org.springframework.boot.jdbc.DataSourceBuilder$DataSourceProperty.URL Lorg/springframework/boot/jdbc/DataSourceBuilder$DataSourceProperty;
+
+# Created at 2026-07-26T10:57:24.320
+    |               INVOKEDYNAMIC #0.get ()Lorg/springframework/boot/jdbc/DataSourceBuilder$Getter;
+
+# Created at 2026-07-26T10:57:24.323
+    |               INVOKEDYNAMIC #1.set ()Lorg/springframework/boot/jdbc/DataSourceBuilder$Setter;
+
+# Created at 2026-07-26T10:57:24.326
+    |               INVOKEVIRTUAL org.springframework.boot.jdbc.DataSourceBuilder$ComboPooledDataSourceProperties.add (Lorg/springframework/boot/jdbc/DataSourceBuilder$DataSourceProperty;Lorg/springframework/boot/jdbc/DataSourceBuilder$Getter;Lorg/springframework/boot/jdbc/DataSourceBuilder$Setter;)V
+
+# Created at 2026-07-26T10:57:24.329
+    |               ALOAD_0     // Lorg/springframework/boot/jdbc/DataSourceBuilder$ComboPooledDataSourceProperties; this   (line 664)
+
+# Created at 2026-07-26T10:57:24.332
+    |               GETSTATIC org.springframework.boot.jdbc.DataSourceBuilder$DataSourceProperty.DRIVER_CLASS_NAME Lorg/springframework/boot/jdbc/DataSourceBuilder$DataSourceProperty;
+
+# Created at 2026-07-26T10:57:24.336
+    |               INVOKEDYNAMIC #2.get ()Lorg/springframework/boot/jdbc/DataSourceBuilder$Getter;
+
+# Created at 2026-07-26T10:57:24.338
+    |               ALOAD_0     // Lorg/springframework/boot/jdbc/DataSourceBuilder$ComboPooledDataSourceProperties; this
+
+# Created at 2026-07-26T10:57:24.341
+    |               INVOKEDYNAMIC #3.set (Lorg/springframework/boot/jdbc/DataSourceBuilder$ComboPooledDataSourceProperties;)Lorg/springframework/boot/jdbc/DataSourceBuilder$Setter;
+
+# Created at 2026-07-26T10:57:24.343
+    |               INVOKEVIRTUAL org.springframework.boot.jdbc.DataSourceBuilder$ComboPooledDataSourceProperties.add (Lorg/springframework/boot/jdbc/DataSourceBuilder$DataSourceProperty;Lorg/springframework/boot/jdbc/DataSourceBuilder$Getter;Lorg/springframework/boot/jdbc/DataSourceBuilder$Setter;)V
+
+# Created at 2026-07-26T10:57:24.345
+    |               ALOAD_0     // Lorg/springframework/boot/jdbc/DataSourceBuilder$ComboPooledDataSourceProperties; this   (line 665)
+
+# Created at 2026-07-26T10:57:24.348
+    |               GETSTATIC org.springframework.boot.jdbc.DataSourceBuilder$DataSourceProperty.USERNAME Lorg/springframework/boot/jdbc/DataSourceBuilder$DataSourceProperty;
+
+# Created at 2026-07-26T10:57:24.350
+    |               INVOKEDYNAMIC #4.get ()Lorg/springframework/boot/jdbc/DataSourceBuilder$Getter;
+
+# Created at 2026-07-26T10:57:24.352
+    |               INVOKEDYNAMIC #5.set ()Lorg/springframework/boot/jdbc/DataSourceBuilder$Setter;
+
+# Created at 2026-07-26T10:57:24.354
+    |               INVOKEVIRTUAL org.springframework.boot.jdbc.DataSourceBuilder$ComboPooledDataSourceProperties.add (Lorg/springframework/boot/jdbc/DataSourceBuilder$DataSourceProperty;Lorg/springframework/boot/jdbc/DataSourceBuilder$Getter;Lorg/springframework/boot/jdbc/DataSourceBuilder$Setter;)V
+
+# Created at 2026-07-26T10:57:24.356
+    |               ALOAD_0     // Lorg/springframework/boot/jdbc/DataSourceBuilder$ComboPooledDataSourceProperties; this   (line 666)
+
+# Created at 2026-07-26T10:57:24.358
+    |               GETSTATIC org.springframework.boot.jdbc.DataSourceBuilder$DataSourceProperty.PASSWORD Lorg/springframework/boot/jdbc/DataSourceBuilder$DataSourceProperty;
+
+# Created at 2026-07-26T10:57:24.360
+    |               INVOKEDYNAMIC #6.get ()Lorg/springframework/boot/jdbc/DataSourceBuilder$Getter;
+
+# Created at 2026-07-26T10:57:24.363
+    |               INVOKEDYNAMIC #7.set ()Lorg/springframework/boot/jdbc/DataSourceBuilder$Setter;
+
+# Created at 2026-07-26T10:57:24.365
+    |               INVOKEVIRTUAL org.springframework.boot.jdbc.DataSourceBuilder$ComboPooledDataSourceProperties.add (Lorg/springframework/boot/jdbc/DataSourceBuilder$DataSourceProperty;Lorg/springframework/boot/jdbc/DataSourceBuilder$Getter;Lorg/springframework/boot/jdbc/DataSourceBuilder$Setter;)V
+
+# Created at 2026-07-26T10:57:24.368
+    |               RETURN   (line 667)
+
+# Created at 2026-07-26T10:57:24.370
+    constructor-execution(void org.springframework.boot.jdbc.DataSourceBuilder$ComboPooledDataSourceProperties.<init>())
+
+# Created at 2026-07-26T10:57:24.372
+  end void <init>()
+
+# Created at 2026-07-26T10:57:24.375
+
+
+# Created at 2026-07-26T10:57:24.377
+  private void setDriverClass(com.mchange.v2.c3p0.ComboPooledDataSource, String):
+
+# Created at 2026-07-26T10:57:24.380
+    catch java.beans.PropertyVetoException -> E0
+
+# Created at 2026-07-26T10:57:24.383
+    |               ALOAD_1     // Lcom/mchange/v2/c3p0/ComboPooledDataSource; dataSource   (line 671)
+
+# Created at 2026-07-26T10:57:24.385
+    |               ALOAD_2     // Ljava/lang/String; driverClass
+
+# Created at 2026-07-26T10:57:24.388
+    |               INVOKEVIRTUAL com.mchange.v2.c3p0.ComboPooledDataSource.setDriverClass (Ljava/lang/String;)V
+
+# Created at 2026-07-26T10:57:24.390
+    catch java.beans.PropertyVetoException -> E0
+
+# Created at 2026-07-26T10:57:24.392
+                    GOTO L0   (line 675)
+
+# Created at 2026-07-26T10:57:24.395
+                E0: ASTORE_3   (line 673)
+
+# Created at 2026-07-26T10:57:24.397
+                    NEW java.lang.IllegalArgumentException   (line 674)
+
+# Created at 2026-07-26T10:57:24.400
+                    DUP
+
+# Created at 2026-07-26T10:57:24.402
+                    ALOAD_3     // Ljava/beans/PropertyVetoException; ex
+
+# Created at 2026-07-26T10:57:24.404
+                    INVOKESPECIAL java.lang.IllegalArgumentException.<init> (Ljava/lang/Throwable;)V
+
+# Created at 2026-07-26T10:57:24.407
+                    ATHROW
+
+# Created at 2026-07-26T10:57:24.409
+                L0: RETURN   (line 676)
+
+# Created at 2026-07-26T10:57:24.411
+  end private void setDriverClass(com.mchange.v2.c3p0.ComboPooledDataSource, String)
+
+# Created at 2026-07-26T10:57:24.413
+
+
+# Created at 2026-07-26T10:57:24.415
+end class org.springframework.boot.jdbc.DataSourceBuilder$ComboPooledDataSourceProperties
+
+# Created at 2026-07-26T10:57:24.418
+ -- (IllegalStateException) org.aspectj.weaver.MissingResolvedTypeWithKnownSignature) (typeBindings={T=com.mchange.v2.c3p0.ComboPooledDataSource})
+
+# Created at 2026-07-26T10:57:24.420
+org.aspectj.weaver.MissingResolvedTypeWithKnownSignature) (typeBindings={T=com.mchange.v2.c3p0.ComboPooledDataSource})
+
+# Created at 2026-07-26T10:57:24.424
+java.lang.IllegalStateException: org.aspectj.weaver.MissingResolvedTypeWithKnownSignature) (typeBindings={T=com.mchange.v2.c3p0.ComboPooledDataSource})
+
+# Created at 2026-07-26T10:57:24.426
+	at org.aspectj.weaver.BoundedReferenceType.parameterize(BoundedReferenceType.java:112)
+
+# Created at 2026-07-26T10:57:24.428
+	at org.aspectj.weaver.ResolvedType.parameterize(ResolvedType.java:2549)
+
+# Created at 2026-07-26T10:57:24.430
+	at org.aspectj.weaver.ResolvedMemberImpl.parameterize(ResolvedMemberImpl.java:897)
+
+# Created at 2026-07-26T10:57:24.432
+	at org.aspectj.weaver.ResolvedMemberImpl.parameterizedWith(ResolvedMemberImpl.java:789)
+
+# Created at 2026-07-26T10:57:24.434
+	at org.aspectj.weaver.ResolvedMemberImpl.parameterizedWith(ResolvedMemberImpl.java:742)
+
+# Created at 2026-07-26T10:57:24.436
+	at org.aspectj.weaver.ReferenceType.getDeclaredMethods(ReferenceType.java:865)
+
+# Created at 2026-07-26T10:57:24.438
+	at org.aspectj.weaver.ResolvedType$MethodGetterIncludingItds.get(ResolvedType.java:271)
+
+# Created at 2026-07-26T10:57:24.440
+	at org.aspectj.weaver.ResolvedType$MethodGetterIncludingItds.get(ResolvedType.java:268)
+
+# Created at 2026-07-26T10:57:24.442
+	at org.aspectj.weaver.Iterators$4$1.hasNext(Iterators.java:213)
+
+# Created at 2026-07-26T10:57:24.444
+	at org.aspectj.weaver.Iterators$4.hasNext(Iterators.java:230)
+
+# Created at 2026-07-26T10:57:24.446
+	at org.aspectj.weaver.ResolvedType.lookupResolvedMember(ResolvedType.java:642)
+
+# Created at 2026-07-26T10:57:24.448
+	at org.aspectj.weaver.JoinPointSignatureIterator.findSignaturesFromSupertypes(JoinPointSignatureIterator.java:192)
+
+# Created at 2026-07-26T10:57:24.450
+	at org.aspectj.weaver.JoinPointSignatureIterator.hasNext(JoinPointSignatureIterator.java:68)
+
+# Created at 2026-07-26T10:57:24.452
+	at org.aspectj.weaver.patterns.SignaturePattern.matches(SignaturePattern.java:317)
+
+# Created at 2026-07-26T10:57:24.454
+	at org.aspectj.weaver.patterns.KindedPointcut.matchInternal(KindedPointcut.java:202)
+
+# Created at 2026-07-26T10:57:24.456
+	at org.aspectj.weaver.patterns.Pointcut.match(Pointcut.java:137)
+
+# Created at 2026-07-26T10:57:24.458
+	at org.aspectj.weaver.patterns.AndPointcut.matchInternal(AndPointcut.java:56)
+
+# Created at 2026-07-26T10:57:24.460
+	at org.aspectj.weaver.patterns.Pointcut.match(Pointcut.java:137)
+
+# Created at 2026-07-26T10:57:24.462
+	at org.aspectj.weaver.patterns.OrPointcut.matchInternal(OrPointcut.java:56)
+
+# Created at 2026-07-26T10:57:24.464
+	at org.aspectj.weaver.patterns.Pointcut.match(Pointcut.java:137)
+
+# Created at 2026-07-26T10:57:24.466
+	at org.aspectj.weaver.ShadowMunger.match(ShadowMunger.java:113)
+
+# Created at 2026-07-26T10:57:24.468
+	at org.aspectj.weaver.Advice.match(Advice.java:113)
+
+# Created at 2026-07-26T10:57:24.470
+	at org.aspectj.weaver.bcel.BcelAdvice.match(BcelAdvice.java:158)
+
+# Created at 2026-07-26T10:57:24.472
+	at org.aspectj.weaver.bcel.BcelClassWeaver.match(BcelClassWeaver.java:3330)
+
+# Created at 2026-07-26T10:57:24.474
+	at org.aspectj.weaver.bcel.BcelClassWeaver.match(BcelClassWeaver.java:2710)
+
+# Created at 2026-07-26T10:57:24.476
+	at org.aspectj.weaver.bcel.BcelClassWeaver.weave(BcelClassWeaver.java:483)
+
+# Created at 2026-07-26T10:57:24.478
+	at org.aspectj.weaver.bcel.BcelClassWeaver.weave(BcelClassWeaver.java:103)
+
+# Created at 2026-07-26T10:57:24.480
+	at org.aspectj.weaver.bcel.BcelWeaver.weave(BcelWeaver.java:1707)
+
+# Created at 2026-07-26T10:57:24.482
+	at org.aspectj.weaver.bcel.BcelWeaver.weaveWithoutDump(BcelWeaver.java:1651)
+
+# Created at 2026-07-26T10:57:24.485
+	at org.aspectj.weaver.bcel.BcelWeaver.weaveAndNotify(BcelWeaver.java:1418)
+
+# Created at 2026-07-26T10:57:24.487
+	at org.aspectj.weaver.bcel.BcelWeaver.weave(BcelWeaver.java:1192)
+
+# Created at 2026-07-26T10:57:24.489
+	at org.aspectj.weaver.tools.WeavingAdaptor.getWovenBytes(WeavingAdaptor.java:549)
+
+# Created at 2026-07-26T10:57:24.491
+	at org.aspectj.weaver.tools.WeavingAdaptor.weaveClass(WeavingAdaptor.java:385)
+
+# Created at 2026-07-26T10:57:24.493
+	at org.aspectj.weaver.loadtime.Aj.preProcess(Aj.java:115)
+
+# Created at 2026-07-26T10:57:24.495
+	at org.aspectj.weaver.loadtime.ClassPreProcessorAgentAdapter.transform(ClassPreProcessorAgentAdapter.java:51)
+
+# Created at 2026-07-26T10:57:24.497
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(ClassFileTransformer.java:246)
+
+# Created at 2026-07-26T10:57:24.499
+	at java.instrument/sun.instrument.TransformerManager.transform(TransformerManager.java:188)
+
+# Created at 2026-07-26T10:57:24.501
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(InstrumentationImpl.java:563)
+
+# Created at 2026-07-26T10:57:24.503
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+
+# Created at 2026-07-26T10:57:24.505
+	at java.base/java.lang.ClassLoader.defineClass(ClassLoader.java:1022)
+
+# Created at 2026-07-26T10:57:24.509
+	at java.base/java.security.SecureClassLoader.defineClass(SecureClassLoader.java:174)
+
+# Created at 2026-07-26T10:57:24.511
+	at java.base/jdk.internal.loader.BuiltinClassLoader.defineClass(BuiltinClassLoader.java:800)
+
+# Created at 2026-07-26T10:57:24.513
+	at java.base/jdk.internal.loader.BuiltinClassLoader.findClassOnClassPathOrNull(BuiltinClassLoader.java:698)
+
+# Created at 2026-07-26T10:57:24.515
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(BuiltinClassLoader.java:621)
+
+# Created at 2026-07-26T10:57:24.517
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:579)
+
+# Created at 2026-07-26T10:57:24.519
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178)
+
+# Created at 2026-07-26T10:57:24.521
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:527)
+
+# Created at 2026-07-26T10:57:24.523
+	at java.base/java.lang.Class.getDeclaringClass0(Native Method)
+
+# Created at 2026-07-26T10:57:24.525
+	at java.base/java.lang.Class.getDeclaringClass(Class.java:1471)
+
+# Created at 2026-07-26T10:57:24.527
+	at java.base/sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl.<init>(ParameterizedTypeImpl.java:51)
+
+# Created at 2026-07-26T10:57:24.529
+	at java.base/sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl.make(ParameterizedTypeImpl.java:93)
+
+# Created at 2026-07-26T10:57:24.531
+	at java.base/sun.reflect.generics.factory.CoreReflectionFactory.makeParameterizedType(CoreReflectionFactory.java:105)
+
+# Created at 2026-07-26T10:57:24.533
+	at java.base/sun.reflect.generics.visitor.Reifier.visitClassTypeSignature(Reifier.java:140)
+
+# Created at 2026-07-26T10:57:24.536
+	at java.base/sun.reflect.generics.tree.ClassTypeSignature.accept(ClassTypeSignature.java:49)
+
+# Created at 2026-07-26T10:57:24.538
+	at java.base/sun.reflect.generics.repository.ClassRepository.computeSuperclass(ClassRepository.java:104)
+
+# Created at 2026-07-26T10:57:24.542
+	at java.base/sun.reflect.generics.repository.ClassRepository.getSuperclass(ClassRepository.java:86)
+
+# Created at 2026-07-26T10:57:24.544
+	at java.base/java.lang.Class.getGenericSuperclass(Class.java:949)
+
+# Created at 2026-07-26T10:57:24.545
+	at org.springframework.core.ResolvableType.getSuperType(ResolvableType.java:476)
+
+# Created at 2026-07-26T10:57:24.547
+	at org.springframework.core.ResolvableType.as(ResolvableType.java:461)
+
+# Created at 2026-07-26T10:57:24.549
+	at org.springframework.core.ResolvableType.forClass(ResolvableType.java:1073)
+
+# Created at 2026-07-26T10:57:24.551
+	at org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperties.<init>(DataSourceBuilder.java:331)
+
+# Created at 2026-07-26T10:57:24.554
+	at org.springframework.boot.jdbc.DataSourceBuilder$HikariDataSourceProperties.<init>(DataSourceBuilder.java:593)
+
+# Created at 2026-07-26T10:57:24.556
+	at org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperties.lookup(DataSourceBuilder.java:422)
+
+# Created at 2026-07-26T10:57:24.559
+	at org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperties.lookupPooled(DataSourceBuilder.java:388)
+
+# Created at 2026-07-26T10:57:24.561
+	at org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperties.forType(DataSourceBuilder.java:378)
+
+# Created at 2026-07-26T10:57:24.563
+	at org.springframework.boot.jdbc.DataSourceBuilder.findType(DataSourceBuilder.java:250)
+
+# Created at 2026-07-26T10:57:24.565
+	at org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration$PooledDataSourceAvailableCondition.getMatchOutcome(DataSourceAutoConfiguration.java:110)
+
+# Created at 2026-07-26T10:57:24.567
+	at org.springframework.boot.autoconfigure.condition.AbstractNestedCondition$MemberOutcomes.getConditionOutcome(AbstractNestedCondition.java:194)
+
+# Created at 2026-07-26T10:57:24.568
+	at org.springframework.boot.autoconfigure.condition.AbstractNestedCondition$MemberOutcomes.<init>(AbstractNestedCondition.java:188)
+
+# Created at 2026-07-26T10:57:24.571
+	at org.springframework.boot.autoconfigure.condition.AbstractNestedCondition$MemberConditions.lambda$getMatchOutcomes$0(AbstractNestedCondition.java:168)
+
+# Created at 2026-07-26T10:57:24.575
+	at java.base/java.util.Map.forEach(Map.java:661)
+
+# Created at 2026-07-26T10:57:24.577
+	at java.base/java.util.Collections$UnmodifiableMap.forEach(Collections.java:1505)
+
+# Created at 2026-07-26T10:57:24.579
+	at org.springframework.boot.autoconfigure.condition.AbstractNestedCondition$MemberConditions.getMatchOutcomes(AbstractNestedCondition.java:168)
+
+# Created at 2026-07-26T10:57:24.580
+	at org.springframework.boot.autoconfigure.condition.AbstractNestedCondition$MemberMatchOutcomes.<init>(AbstractNestedCondition.java:78)
+
+# Created at 2026-07-26T10:57:24.583
+	at org.springframework.boot.autoconfigure.condition.AbstractNestedCondition.getMatchOutcome(AbstractNestedCondition.java:63)
+
+# Created at 2026-07-26T10:57:24.585
+	at org.springframework.boot.autoconfigure.condition.SpringBootCondition.matches(SpringBootCondition.java:47)
+
+# Created at 2026-07-26T10:57:24.587
+	at org.springframework.context.annotation.ConditionEvaluator.shouldSkip(ConditionEvaluator.java:108)
+
+# Created at 2026-07-26T10:57:24.589
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:225)
+
+# Created at 2026-07-26T10:57:24.591
+	at org.springframework.context.annotation.ConfigurationClassParser.processMemberClasses(ConfigurationClassParser.java:371)
+
+# Created at 2026-07-26T10:57:24.593
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:271)
+
+# Created at 2026-07-26T10:57:24.596
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:249)
+
+# Created at 2026-07-26T10:57:24.598
+	at org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:602)
+
+# Created at 2026-07-26T10:57:24.600
+	at org.springframework.context.annotation.ConfigurationClassParser.access$800(ConfigurationClassParser.java:110)
+
+# Created at 2026-07-26T10:57:24.602
+	at org.springframework.context.annotation.ConfigurationClassParser$DeferredImportSelectorGroupingHandler.lambda$processGroupImports$1(ConfigurationClassParser.java:815)
+
+# Created at 2026-07-26T10:57:24.604
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+
+# Created at 2026-07-26T10:57:24.607
+	at org.springframework.context.annotation.ConfigurationClassParser$DeferredImportSelectorGroupingHandler.processGroupImports(ConfigurationClassParser.java:812)
+
+# Created at 2026-07-26T10:57:24.609
+	at org.springframework.context.annotation.ConfigurationClassParser$DeferredImportSelectorHandler.process(ConfigurationClassParser.java:783)
+
+# Created at 2026-07-26T10:57:24.611
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:192)
+
+# Created at 2026-07-26T10:57:24.614
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:331)
+
+# Created at 2026-07-26T10:57:24.617
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:247)
+
+# Created at 2026-07-26T10:57:24.619
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:311)
+
+# Created at 2026-07-26T10:57:24.621
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:112)
+
+# Created at 2026-07-26T10:57:24.623
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:756)
+
+# Created at 2026-07-26T10:57:24.625
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:572)
+
+# Created at 2026-07-26T10:57:24.627
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732)
+
+# Created at 2026-07-26T10:57:24.629
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:409)
+
+# Created at 2026-07-26T10:57:24.631
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+
+# Created at 2026-07-26T10:57:24.632
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:136)
+
+# Created at 2026-07-26T10:57:24.635
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:141)
+
+# Created at 2026-07-26T10:57:24.637
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:90)
+
+# Created at 2026-07-26T10:57:24.639
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+
+# Created at 2026-07-26T10:57:24.641
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+
+# Created at 2026-07-26T10:57:24.643
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+
+# Created at 2026-07-26T10:57:24.645
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:248)
+
+# Created at 2026-07-26T10:57:24.647
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:138)
+
+# Created at 2026-07-26T10:57:24.650
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$8(ClassBasedTestDescriptor.java:363)
+
+# Created at 2026-07-26T10:57:24.653
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:368)
+
+# Created at 2026-07-26T10:57:24.660
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$9(ClassBasedTestDescriptor.java:363)
+
+# Created at 2026-07-26T10:57:24.662
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+
+# Created at 2026-07-26T10:57:24.664
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+
+# Created at 2026-07-26T10:57:24.667
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+
+# Created at 2026-07-26T10:57:24.669
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+
+# Created at 2026-07-26T10:57:24.671
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+
+# Created at 2026-07-26T10:57:24.673
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312)
+
+# Created at 2026-07-26T10:57:24.676
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735)
+
+# Created at 2026-07-26T10:57:24.678
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+
+# Created at 2026-07-26T10:57:24.680
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+
+# Created at 2026-07-26T10:57:24.682
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:362)
+
+# Created at 2026-07-26T10:57:24.684
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$6(ClassBasedTestDescriptor.java:283)
+
+# Created at 2026-07-26T10:57:24.686
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+
+# Created at 2026-07-26T10:57:24.688
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:282)
+
+# Created at 2026-07-26T10:57:24.690
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$4(ClassBasedTestDescriptor.java:272)
+
+# Created at 2026-07-26T10:57:24.692
+	at java.base/java.util.Optional.orElseGet(Optional.java:369)
+
+# Created at 2026-07-26T10:57:24.695
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$5(ClassBasedTestDescriptor.java:271)
+
+# Created at 2026-07-26T10:57:24.697
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:31)
+
+# Created at 2026-07-26T10:57:24.699
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:102)
+
+# Created at 2026-07-26T10:57:24.701
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+
+# Created at 2026-07-26T10:57:24.703
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:101)
+
+# Created at 2026-07-26T10:57:24.705
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:66)
+
+# Created at 2026-07-26T10:57:24.708
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:123)
+
+# Created at 2026-07-26T10:57:24.710
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+
+# Created at 2026-07-26T10:57:24.712
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:123)
+
+# Created at 2026-07-26T10:57:24.714
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:90)
+
+# Created at 2026-07-26T10:57:24.716
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+
+# Created at 2026-07-26T10:57:24.719
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+
+# Created at 2026-07-26T10:57:24.722
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+
+# Created at 2026-07-26T10:57:24.725
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+
+# Created at 2026-07-26T10:57:24.727
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+
+# Created at 2026-07-26T10:57:24.729
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+
+# Created at 2026-07-26T10:57:24.731
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+
+# Created at 2026-07-26T10:57:24.733
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+
+# Created at 2026-07-26T10:57:24.736
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+
+# Created at 2026-07-26T10:57:24.738
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+
+# Created at 2026-07-26T10:57:24.741
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+
+# Created at 2026-07-26T10:57:24.743
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+
+# Created at 2026-07-26T10:57:24.746
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+
+# Created at 2026-07-26T10:57:24.748
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+
+# Created at 2026-07-26T10:57:24.750
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+
+# Created at 2026-07-26T10:57:24.752
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+
+# Created at 2026-07-26T10:57:24.755
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+
+# Created at 2026-07-26T10:57:24.757
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+
+# Created at 2026-07-26T10:57:24.759
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+
+# Created at 2026-07-26T10:57:24.761
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+
+# Created at 2026-07-26T10:57:24.764
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+
+# Created at 2026-07-26T10:57:24.767
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+
+# Created at 2026-07-26T10:57:24.769
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+
+# Created at 2026-07-26T10:57:24.771
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107)
+
+# Created at 2026-07-26T10:57:24.773
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
+
+# Created at 2026-07-26T10:57:24.775
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
+
+# Created at 2026-07-26T10:57:24.778
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
+
+# Created at 2026-07-26T10:57:24.780
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
+
+# Created at 2026-07-26T10:57:24.783
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+
+# Created at 2026-07-26T10:57:24.786
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86)
+
+# Created at 2026-07-26T10:57:24.789
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86)
+
+# Created at 2026-07-26T10:57:24.792
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53)
+
+# Created at 2026-07-26T10:57:24.794
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:150)
+
+# Created at 2026-07-26T10:57:24.796
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:124)
+
+# Created at 2026-07-26T10:57:24.803
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+
+# Created at 2026-07-26T10:57:24.809
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+
+# Created at 2026-07-26T10:57:24.811
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+
+# Created at 2026-07-26T10:57:24.814
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+
+# Created at 2026-07-26T10:57:24.816
+
+
+# Created at 2026-07-26T10:57:24.818
+[AppClassLoader@3d4eac69] abort trouble in: 
+
+# Created at 2026-07-26T10:57:24.826
+class org.springframework.boot.jdbc.DataSourceBuilder$OraclePoolDataSourceProperties extends org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperties:
+
+# Created at 2026-07-26T10:57:24.828
+  public Class getDataSourceInstanceType():
+
+# Created at 2026-07-26T10:57:24.830
+                    LDC oracle.ucp.jdbc.PoolDataSourceImpl   (line 644)
+
+# Created at 2026-07-26T10:57:24.832
+                    ARETURN
+
+# Created at 2026-07-26T10:57:24.834
+  end public Class getDataSourceInstanceType()
+
+# Created at 2026-07-26T10:57:24.837
+
+
+# Created at 2026-07-26T10:57:24.840
+  void <init>():
+
+# Created at 2026-07-26T10:57:24.843
+                    ALOAD_0     // Lorg/springframework/boot/jdbc/DataSourceBuilder$OraclePoolDataSourceProperties; this   (line 647)
+
+# Created at 2026-07-26T10:57:24.845
+                    INVOKESPECIAL org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperties.<init> ()V
+
+# Created at 2026-07-26T10:57:24.847
+                    ALOAD_0     // Lorg/springframework/boot/jdbc/DataSourceBuilder$OraclePoolDataSourceProperties; this   (line 648)
+
+# Created at 2026-07-26T10:57:24.848
+                    GETSTATIC org.springframework.boot.jdbc.DataSourceBuilder$DataSourceProperty.URL Lorg/springframework/boot/jdbc/DataSourceBuilder$DataSourceProperty;
+
+# Created at 2026-07-26T10:57:24.850
+                    INVOKEDYNAMIC #0.get ()Lorg/springframework/boot/jdbc/DataSourceBuilder$Getter;
+
+# Created at 2026-07-26T10:57:24.852
+                    INVOKEDYNAMIC #1.set ()Lorg/springframework/boot/jdbc/DataSourceBuilder$Setter;
+
+# Created at 2026-07-26T10:57:24.855
+                    INVOKEVIRTUAL org.springframework.boot.jdbc.DataSourceBuilder$OraclePoolDataSourceProperties.add (Lorg/springframework/boot/jdbc/DataSourceBuilder$DataSourceProperty;Lorg/springframework/boot/jdbc/DataSourceBuilder$Getter;Lorg/springframework/boot/jdbc/DataSourceBuilder$Setter;)V
+
+# Created at 2026-07-26T10:57:24.857
+                    ALOAD_0     // Lorg/springframework/boot/jdbc/DataSourceBuilder$OraclePoolDataSourceProperties; this   (line 649)
+
+# Created at 2026-07-26T10:57:24.858
+                    GETSTATIC org.springframework.boot.jdbc.DataSourceBuilder$DataSourceProperty.DRIVER_CLASS_NAME Lorg/springframework/boot/jdbc/DataSourceBuilder$DataSourceProperty;
+
+# Created at 2026-07-26T10:57:24.860
+                    INVOKEDYNAMIC #2.get ()Lorg/springframework/boot/jdbc/DataSourceBuilder$Getter;
+
+# Created at 2026-07-26T10:57:24.862
+                    INVOKEDYNAMIC #3.set ()Lorg/springframework/boot/jdbc/DataSourceBuilder$Setter;
+
+# Created at 2026-07-26T10:57:24.864
+                    INVOKEVIRTUAL org.springframework.boot.jdbc.DataSourceBuilder$OraclePoolDataSourceProperties.add (Lorg/springframework/boot/jdbc/DataSourceBuilder$DataSourceProperty;Lorg/springframework/boot/jdbc/DataSourceBuilder$Getter;Lorg/springframework/boot/jdbc/DataSourceBuilder$Setter;)V
+
+# Created at 2026-07-26T10:57:24.866
+                    ALOAD_0     // Lorg/springframework/boot/jdbc/DataSourceBuilder$OraclePoolDataSourceProperties; this   (line 651)
+
+# Created at 2026-07-26T10:57:24.868
+                    GETSTATIC org.springframework.boot.jdbc.DataSourceBuilder$DataSourceProperty.USERNAME Lorg/springframework/boot/jdbc/DataSourceBuilder$DataSourceProperty;
+
+# Created at 2026-07-26T10:57:24.870
+                    INVOKEDYNAMIC #4.get ()Lorg/springframework/boot/jdbc/DataSourceBuilder$Getter;
+
+# Created at 2026-07-26T10:57:24.872
+                    INVOKEDYNAMIC #5.set ()Lorg/springframework/boot/jdbc/DataSourceBuilder$Setter;
+
+# Created at 2026-07-26T10:57:24.875
+                    INVOKEVIRTUAL org.springframework.boot.jdbc.DataSourceBuilder$OraclePoolDataSourceProperties.add (Lorg/springframework/boot/jdbc/DataSourceBuilder$DataSourceProperty;Lorg/springframework/boot/jdbc/DataSourceBuilder$Getter;Lorg/springframework/boot/jdbc/DataSourceBuilder$Setter;)V
+
+# Created at 2026-07-26T10:57:24.878
+                    ALOAD_0     // Lorg/springframework/boot/jdbc/DataSourceBuilder$OraclePoolDataSourceProperties; this   (line 652)
+
+# Created at 2026-07-26T10:57:24.880
+                    GETSTATIC org.springframework.boot.jdbc.DataSourceBuilder$DataSourceProperty.PASSWORD Lorg/springframework/boot/jdbc/DataSourceBuilder$DataSourceProperty;
+
+# Created at 2026-07-26T10:57:24.882
+                    ACONST_NULL
+
+# Created at 2026-07-26T10:57:24.884
+                    INVOKEDYNAMIC #6.set ()Lorg/springframework/boot/jdbc/DataSourceBuilder$Setter;
+
+# Created at 2026-07-26T10:57:24.886
+                    INVOKEVIRTUAL org.springframework.boot.jdbc.DataSourceBuilder$OraclePoolDataSourceProperties.add (Lorg/springframework/boot/jdbc/DataSourceBuilder$DataSourceProperty;Lorg/springframework/boot/jdbc/DataSourceBuilder$Getter;Lorg/springframework/boot/jdbc/DataSourceBuilder$Setter;)V
+
+# Created at 2026-07-26T10:57:24.888
+                    RETURN   (line 653)
+
+# Created at 2026-07-26T10:57:24.890
+  end void <init>()
+
+# Created at 2026-07-26T10:57:24.892
+
+
+# Created at 2026-07-26T10:57:24.894
+end class org.springframework.boot.jdbc.DataSourceBuilder$OraclePoolDataSourceProperties
+
+# Created at 2026-07-26T10:57:24.896
+ -- (IllegalStateException) org.aspectj.weaver.MissingResolvedTypeWithKnownSignature) (typeBindings={T=oracle.ucp.jdbc.PoolDataSource})
+
+# Created at 2026-07-26T10:57:24.898
+org.aspectj.weaver.MissingResolvedTypeWithKnownSignature) (typeBindings={T=oracle.ucp.jdbc.PoolDataSource})
+
+# Created at 2026-07-26T10:57:24.899
+java.lang.IllegalStateException: org.aspectj.weaver.MissingResolvedTypeWithKnownSignature) (typeBindings={T=oracle.ucp.jdbc.PoolDataSource})
+
+# Created at 2026-07-26T10:57:24.901
+	at org.aspectj.weaver.BoundedReferenceType.parameterize(BoundedReferenceType.java:112)
+
+# Created at 2026-07-26T10:57:24.903
+	at org.aspectj.weaver.ResolvedType.parameterize(ResolvedType.java:2549)
+
+# Created at 2026-07-26T10:57:24.905
+	at org.aspectj.weaver.ResolvedMemberImpl.parameterize(ResolvedMemberImpl.java:897)
+
+# Created at 2026-07-26T10:57:24.907
+	at org.aspectj.weaver.ResolvedMemberImpl.parameterizedWith(ResolvedMemberImpl.java:789)
+
+# Created at 2026-07-26T10:57:24.909
+	at org.aspectj.weaver.ResolvedMemberImpl.parameterizedWith(ResolvedMemberImpl.java:742)
+
+# Created at 2026-07-26T10:57:24.911
+	at org.aspectj.weaver.ReferenceType.getDeclaredMethods(ReferenceType.java:865)
+
+# Created at 2026-07-26T10:57:24.913
+	at org.aspectj.weaver.ResolvedType$MethodGetterIncludingItds.get(ResolvedType.java:271)
+
+# Created at 2026-07-26T10:57:24.914
+	at org.aspectj.weaver.ResolvedType$MethodGetterIncludingItds.get(ResolvedType.java:268)
+
+# Created at 2026-07-26T10:57:24.916
+	at org.aspectj.weaver.Iterators$4$1.hasNext(Iterators.java:213)
+
+# Created at 2026-07-26T10:57:24.918
+	at org.aspectj.weaver.Iterators$4.hasNext(Iterators.java:230)
+
+# Created at 2026-07-26T10:57:24.920
+	at org.aspectj.weaver.ResolvedType.lookupResolvedMember(ResolvedType.java:642)
+
+# Created at 2026-07-26T10:57:24.922
+	at org.aspectj.weaver.JoinPointSignatureIterator.findSignaturesFromSupertypes(JoinPointSignatureIterator.java:192)
+
+# Created at 2026-07-26T10:57:24.924
+	at org.aspectj.weaver.JoinPointSignatureIterator.hasNext(JoinPointSignatureIterator.java:68)
+
+# Created at 2026-07-26T10:57:24.926
+	at org.aspectj.weaver.patterns.SignaturePattern.matches(SignaturePattern.java:317)
+
+# Created at 2026-07-26T10:57:24.928
+	at org.aspectj.weaver.patterns.KindedPointcut.matchInternal(KindedPointcut.java:202)
+
+# Created at 2026-07-26T10:57:24.930
+	at org.aspectj.weaver.patterns.Pointcut.match(Pointcut.java:137)
+
+# Created at 2026-07-26T10:57:24.932
+	at org.aspectj.weaver.patterns.AndPointcut.matchInternal(AndPointcut.java:56)
+
+# Created at 2026-07-26T10:57:24.933
+	at org.aspectj.weaver.patterns.Pointcut.match(Pointcut.java:137)
+
+# Created at 2026-07-26T10:57:24.935
+	at org.aspectj.weaver.patterns.OrPointcut.matchInternal(OrPointcut.java:56)
+
+# Created at 2026-07-26T10:57:24.937
+	at org.aspectj.weaver.patterns.Pointcut.match(Pointcut.java:137)
+
+# Created at 2026-07-26T10:57:24.939
+	at org.aspectj.weaver.ShadowMunger.match(ShadowMunger.java:113)
+
+# Created at 2026-07-26T10:57:24.940
+	at org.aspectj.weaver.Advice.match(Advice.java:113)
+
+# Created at 2026-07-26T10:57:24.942
+	at org.aspectj.weaver.bcel.BcelAdvice.match(BcelAdvice.java:158)
+
+# Created at 2026-07-26T10:57:24.944
+	at org.aspectj.weaver.bcel.BcelClassWeaver.match(BcelClassWeaver.java:3330)
+
+# Created at 2026-07-26T10:57:24.946
+	at org.aspectj.weaver.bcel.BcelClassWeaver.match(BcelClassWeaver.java:2710)
+
+# Created at 2026-07-26T10:57:24.948
+	at org.aspectj.weaver.bcel.BcelClassWeaver.weave(BcelClassWeaver.java:483)
+
+# Created at 2026-07-26T10:57:24.950
+	at org.aspectj.weaver.bcel.BcelClassWeaver.weave(BcelClassWeaver.java:103)
+
+# Created at 2026-07-26T10:57:24.951
+	at org.aspectj.weaver.bcel.BcelWeaver.weave(BcelWeaver.java:1707)
+
+# Created at 2026-07-26T10:57:24.953
+	at org.aspectj.weaver.bcel.BcelWeaver.weaveWithoutDump(BcelWeaver.java:1651)
+
+# Created at 2026-07-26T10:57:24.955
+	at org.aspectj.weaver.bcel.BcelWeaver.weaveAndNotify(BcelWeaver.java:1418)
+
+# Created at 2026-07-26T10:57:24.957
+	at org.aspectj.weaver.bcel.BcelWeaver.weave(BcelWeaver.java:1192)
+
+# Created at 2026-07-26T10:57:24.959
+	at org.aspectj.weaver.tools.WeavingAdaptor.getWovenBytes(WeavingAdaptor.java:549)
+
+# Created at 2026-07-26T10:57:24.961
+	at org.aspectj.weaver.tools.WeavingAdaptor.weaveClass(WeavingAdaptor.java:385)
+
+# Created at 2026-07-26T10:57:24.963
+	at org.aspectj.weaver.loadtime.Aj.preProcess(Aj.java:115)
+
+# Created at 2026-07-26T10:57:24.964
+	at org.aspectj.weaver.loadtime.ClassPreProcessorAgentAdapter.transform(ClassPreProcessorAgentAdapter.java:51)
+
+# Created at 2026-07-26T10:57:24.967
+	at java.instrument/java.lang.instrument.ClassFileTransformer.transform(ClassFileTransformer.java:246)
+
+# Created at 2026-07-26T10:57:24.969
+	at java.instrument/sun.instrument.TransformerManager.transform(TransformerManager.java:188)
+
+# Created at 2026-07-26T10:57:24.971
+	at java.instrument/sun.instrument.InstrumentationImpl.transform(InstrumentationImpl.java:563)
+
+# Created at 2026-07-26T10:57:24.973
+	at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+
+# Created at 2026-07-26T10:57:24.977
+	at java.base/java.lang.ClassLoader.defineClass(ClassLoader.java:1022)
+
+# Created at 2026-07-26T10:57:24.978
+	at java.base/java.security.SecureClassLoader.defineClass(SecureClassLoader.java:174)
+
+# Created at 2026-07-26T10:57:24.980
+	at java.base/jdk.internal.loader.BuiltinClassLoader.defineClass(BuiltinClassLoader.java:800)
+
+# Created at 2026-07-26T10:57:24.982
+	at java.base/jdk.internal.loader.BuiltinClassLoader.findClassOnClassPathOrNull(BuiltinClassLoader.java:698)
+
+# Created at 2026-07-26T10:57:24.984
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClassOrNull(BuiltinClassLoader.java:621)
+
+# Created at 2026-07-26T10:57:24.986
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:579)
+
+# Created at 2026-07-26T10:57:24.988
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:178)
+
+# Created at 2026-07-26T10:57:24.990
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:527)
+
+# Created at 2026-07-26T10:57:24.991
+	at java.base/java.lang.Class.getDeclaringClass0(Native Method)
+
+# Created at 2026-07-26T10:57:24.994
+	at java.base/java.lang.Class.getDeclaringClass(Class.java:1471)
+
+# Created at 2026-07-26T10:57:24.996
+	at java.base/sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl.<init>(ParameterizedTypeImpl.java:51)
+
+# Created at 2026-07-26T10:57:24.998
+	at java.base/sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl.make(ParameterizedTypeImpl.java:93)
+
+# Created at 2026-07-26T10:57:25.000
+	at java.base/sun.reflect.generics.factory.CoreReflectionFactory.makeParameterizedType(CoreReflectionFactory.java:105)
+
+# Created at 2026-07-26T10:57:25.002
+	at java.base/sun.reflect.generics.visitor.Reifier.visitClassTypeSignature(Reifier.java:140)
+
+# Created at 2026-07-26T10:57:25.004
+	at java.base/sun.reflect.generics.tree.ClassTypeSignature.accept(ClassTypeSignature.java:49)
+
+# Created at 2026-07-26T10:57:25.005
+	at java.base/sun.reflect.generics.repository.ClassRepository.computeSuperclass(ClassRepository.java:104)
+
+# Created at 2026-07-26T10:57:25.007
+	at java.base/sun.reflect.generics.repository.ClassRepository.getSuperclass(ClassRepository.java:86)
+
+# Created at 2026-07-26T10:57:25.009
+	at java.base/java.lang.Class.getGenericSuperclass(Class.java:949)
+
+# Created at 2026-07-26T10:57:25.011
+	at org.springframework.core.ResolvableType.getSuperType(ResolvableType.java:476)
+
+# Created at 2026-07-26T10:57:25.013
+	at org.springframework.core.ResolvableType.as(ResolvableType.java:461)
+
+# Created at 2026-07-26T10:57:25.015
+	at org.springframework.core.ResolvableType.forClass(ResolvableType.java:1073)
+
+# Created at 2026-07-26T10:57:25.017
+	at org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperties.<init>(DataSourceBuilder.java:331)
+
+# Created at 2026-07-26T10:57:25.019
+	at org.springframework.boot.jdbc.DataSourceBuilder$HikariDataSourceProperties.<init>(DataSourceBuilder.java:593)
+
+# Created at 2026-07-26T10:57:25.020
+	at org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperties.lookup(DataSourceBuilder.java:422)
+
+# Created at 2026-07-26T10:57:25.022
+	at org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperties.lookupPooled(DataSourceBuilder.java:388)
+
+# Created at 2026-07-26T10:57:25.024
+	at org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperties.forType(DataSourceBuilder.java:378)
+
+# Created at 2026-07-26T10:57:25.026
+	at org.springframework.boot.jdbc.DataSourceBuilder.findType(DataSourceBuilder.java:250)
+
+# Created at 2026-07-26T10:57:25.028
+	at org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration$PooledDataSourceAvailableCondition.getMatchOutcome(DataSourceAutoConfiguration.java:110)
+
+# Created at 2026-07-26T10:57:25.030
+	at org.springframework.boot.autoconfigure.condition.AbstractNestedCondition$MemberOutcomes.getConditionOutcome(AbstractNestedCondition.java:194)
+
+# Created at 2026-07-26T10:57:25.032
+	at org.springframework.boot.autoconfigure.condition.AbstractNestedCondition$MemberOutcomes.<init>(AbstractNestedCondition.java:188)
+
+# Created at 2026-07-26T10:57:25.033
+	at org.springframework.boot.autoconfigure.condition.AbstractNestedCondition$MemberConditions.lambda$getMatchOutcomes$0(AbstractNestedCondition.java:168)
+
+# Created at 2026-07-26T10:57:25.035
+	at java.base/java.util.Map.forEach(Map.java:661)
+
+# Created at 2026-07-26T10:57:25.037
+	at java.base/java.util.Collections$UnmodifiableMap.forEach(Collections.java:1505)
+
+# Created at 2026-07-26T10:57:25.039
+	at org.springframework.boot.autoconfigure.condition.AbstractNestedCondition$MemberConditions.getMatchOutcomes(AbstractNestedCondition.java:168)
+
+# Created at 2026-07-26T10:57:25.041
+	at org.springframework.boot.autoconfigure.condition.AbstractNestedCondition$MemberMatchOutcomes.<init>(AbstractNestedCondition.java:78)
+
+# Created at 2026-07-26T10:57:25.043
+	at org.springframework.boot.autoconfigure.condition.AbstractNestedCondition.getMatchOutcome(AbstractNestedCondition.java:63)
+
+# Created at 2026-07-26T10:57:25.044
+	at org.springframework.boot.autoconfigure.condition.SpringBootCondition.matches(SpringBootCondition.java:47)
+
+# Created at 2026-07-26T10:57:25.046
+	at org.springframework.context.annotation.ConditionEvaluator.shouldSkip(ConditionEvaluator.java:108)
+
+# Created at 2026-07-26T10:57:25.048
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:225)
+
+# Created at 2026-07-26T10:57:25.050
+	at org.springframework.context.annotation.ConfigurationClassParser.processMemberClasses(ConfigurationClassParser.java:371)
+
+# Created at 2026-07-26T10:57:25.052
+	at org.springframework.context.annotation.ConfigurationClassParser.doProcessConfigurationClass(ConfigurationClassParser.java:271)
+
+# Created at 2026-07-26T10:57:25.054
+	at org.springframework.context.annotation.ConfigurationClassParser.processConfigurationClass(ConfigurationClassParser.java:249)
+
+# Created at 2026-07-26T10:57:25.056
+	at org.springframework.context.annotation.ConfigurationClassParser.processImports(ConfigurationClassParser.java:602)
+
+# Created at 2026-07-26T10:57:25.058
+	at org.springframework.context.annotation.ConfigurationClassParser.access$800(ConfigurationClassParser.java:110)
+
+# Created at 2026-07-26T10:57:25.060
+	at org.springframework.context.annotation.ConfigurationClassParser$DeferredImportSelectorGroupingHandler.lambda$processGroupImports$1(ConfigurationClassParser.java:815)
+
+# Created at 2026-07-26T10:57:25.061
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+
+# Created at 2026-07-26T10:57:25.063
+	at org.springframework.context.annotation.ConfigurationClassParser$DeferredImportSelectorGroupingHandler.processGroupImports(ConfigurationClassParser.java:812)
+
+# Created at 2026-07-26T10:57:25.065
+	at org.springframework.context.annotation.ConfigurationClassParser$DeferredImportSelectorHandler.process(ConfigurationClassParser.java:783)
+
+# Created at 2026-07-26T10:57:25.067
+	at org.springframework.context.annotation.ConfigurationClassParser.parse(ConfigurationClassParser.java:192)
+
+# Created at 2026-07-26T10:57:25.069
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:331)
+
+# Created at 2026-07-26T10:57:25.071
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:247)
+
+# Created at 2026-07-26T10:57:25.073
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:311)
+
+# Created at 2026-07-26T10:57:25.075
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:112)
+
+# Created at 2026-07-26T10:57:25.077
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:756)
+
+# Created at 2026-07-26T10:57:25.079
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:572)
+
+# Created at 2026-07-26T10:57:25.081
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732)
+
+# Created at 2026-07-26T10:57:25.083
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:409)
+
+# Created at 2026-07-26T10:57:25.086
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+
+# Created at 2026-07-26T10:57:25.088
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:136)
+
+# Created at 2026-07-26T10:57:25.090
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:141)
+
+# Created at 2026-07-26T10:57:25.092
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:90)
+
+# Created at 2026-07-26T10:57:25.094
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:124)
+
+# Created at 2026-07-26T10:57:25.095
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:190)
+
+# Created at 2026-07-26T10:57:25.097
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:132)
+
+# Created at 2026-07-26T10:57:25.099
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:248)
+
+# Created at 2026-07-26T10:57:25.101
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:138)
+
+# Created at 2026-07-26T10:57:25.102
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$8(ClassBasedTestDescriptor.java:363)
+
+# Created at 2026-07-26T10:57:25.104
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:368)
+
+# Created at 2026-07-26T10:57:25.106
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$9(ClassBasedTestDescriptor.java:363)
+
+# Created at 2026-07-26T10:57:25.108
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)
+
+# Created at 2026-07-26T10:57:25.110
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:177)
+
+# Created at 2026-07-26T10:57:25.113
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1655)
+
+# Created at 2026-07-26T10:57:25.115
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)
+
+# Created at 2026-07-26T10:57:25.118
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)
+
+# Created at 2026-07-26T10:57:25.120
+	at java.base/java.util.stream.StreamSpliterators$WrappingSpliterator.forEachRemaining(StreamSpliterators.java:312)
+
+# Created at 2026-07-26T10:57:25.123
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:735)
+
+# Created at 2026-07-26T10:57:25.125
+	at java.base/java.util.stream.Streams$ConcatSpliterator.forEachRemaining(Streams.java:734)
+
+# Created at 2026-07-26T10:57:25.129
+	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:658)
+
+# Created at 2026-07-26T10:57:25.132
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:362)
+
+# Created at 2026-07-26T10:57:25.137
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$6(ClassBasedTestDescriptor.java:283)
+
+# Created at 2026-07-26T10:57:25.139
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+
+# Created at 2026-07-26T10:57:25.141
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:282)
+
+# Created at 2026-07-26T10:57:25.143
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$4(ClassBasedTestDescriptor.java:272)
+
+# Created at 2026-07-26T10:57:25.145
+	at java.base/java.util.Optional.orElseGet(Optional.java:369)
+
+# Created at 2026-07-26T10:57:25.147
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$5(ClassBasedTestDescriptor.java:271)
+
+# Created at 2026-07-26T10:57:25.151
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:31)
+
+# Created at 2026-07-26T10:57:25.153
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:102)
+
+# Created at 2026-07-26T10:57:25.155
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+
+# Created at 2026-07-26T10:57:25.157
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:101)
+
+# Created at 2026-07-26T10:57:25.159
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:66)
+
+# Created at 2026-07-26T10:57:25.160
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$2(NodeTestTask.java:123)
+
+# Created at 2026-07-26T10:57:25.162
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+
+# Created at 2026-07-26T10:57:25.164
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:123)
+
+# Created at 2026-07-26T10:57:25.167
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:90)
+
+# Created at 2026-07-26T10:57:25.169
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+
+# Created at 2026-07-26T10:57:25.171
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+
+# Created at 2026-07-26T10:57:25.173
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+
+# Created at 2026-07-26T10:57:25.176
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+
+# Created at 2026-07-26T10:57:25.177
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+
+# Created at 2026-07-26T10:57:25.179
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+
+# Created at 2026-07-26T10:57:25.181
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+
+# Created at 2026-07-26T10:57:25.183
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+
+# Created at 2026-07-26T10:57:25.185
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+
+# Created at 2026-07-26T10:57:25.187
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+
+# Created at 2026-07-26T10:57:25.189
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1541)
+
+# Created at 2026-07-26T10:57:25.191
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:41)
+
+# Created at 2026-07-26T10:57:25.193
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$6(NodeTestTask.java:155)
+
+# Created at 2026-07-26T10:57:25.195
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+
+# Created at 2026-07-26T10:57:25.197
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$8(NodeTestTask.java:141)
+
+# Created at 2026-07-26T10:57:25.199
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:137)
+
+# Created at 2026-07-26T10:57:25.201
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$9(NodeTestTask.java:139)
+
+# Created at 2026-07-26T10:57:25.203
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:73)
+
+# Created at 2026-07-26T10:57:25.205
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:138)
+
+# Created at 2026-07-26T10:57:25.207
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:95)
+
+# Created at 2026-07-26T10:57:25.210
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:35)
+
+# Created at 2026-07-26T10:57:25.212
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:57)
+
+# Created at 2026-07-26T10:57:25.214
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:54)
+
+# Created at 2026-07-26T10:57:25.216
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:107)
+
+# Created at 2026-07-26T10:57:25.218
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)
+
+# Created at 2026-07-26T10:57:25.222
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)
+
+# Created at 2026-07-26T10:57:25.223
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)
+
+# Created at 2026-07-26T10:57:25.225
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)
+
+# Created at 2026-07-26T10:57:25.227
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114)
+
+# Created at 2026-07-26T10:57:25.229
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:86)
+
+# Created at 2026-07-26T10:57:25.231
+	at org.junit.platform.launcher.core.DefaultLauncherSession$DelegatingLauncher.execute(DefaultLauncherSession.java:86)
+
+# Created at 2026-07-26T10:57:25.233
+	at org.junit.platform.launcher.core.SessionPerRequestLauncher.execute(SessionPerRequestLauncher.java:53)
+
+# Created at 2026-07-26T10:57:25.235
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:150)
+
+# Created at 2026-07-26T10:57:25.237
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:124)
+
+# Created at 2026-07-26T10:57:25.239
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:384)
+
+# Created at 2026-07-26T10:57:25.241
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:345)
+
+# Created at 2026-07-26T10:57:25.243
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:126)
+
+# Created at 2026-07-26T10:57:25.244
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:418)
+
+# Created at 2026-07-26T10:57:25.246
+
+
