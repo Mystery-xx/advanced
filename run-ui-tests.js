@@ -225,6 +225,327 @@ async function runAdminFlowScenario(page) {
   return scenario;
 }
 
+// ─── Scenario: Registration - Valid Data ───────────────────────
+async function runRegistrationValidScenario(page) {
+  const scenario = {
+    name: 'Successful registration with valid data',
+    feature: 'registration.feature',
+    steps: [],
+  };
+
+  await page.context().clearCookies();
+
+  // Given: registration page is displayed
+  const step1 = await executeStep(page, scenario, 'Given', 'the registration page is displayed', async () => {
+    await page.goto(APP_URL + '/register', { waitUntil: 'domcontentloaded', timeout: 10000 });
+    await sleep(500);
+    const hasNameField = await page.locator('#name').count() > 0;
+    return { pass: hasNameField, detail: 'Registration form loaded' };
+  });
+
+  // When: fill in valid registration details
+  const step2 = await executeStep(page, scenario, 'When', 'the user fills in valid registration details', async () => {
+    const timestamp = Date.now();
+    await page.fill('#name', `Test User ${timestamp}`);
+    await page.fill('#email', `testuser${timestamp}@example.com`);
+    await page.fill('#password', 'SecurePass123');
+    await page.fill('#confirmPassword', 'SecurePass123');
+    return { pass: true, detail: 'Form filled with valid data' };
+  });
+
+  // And: submit the registration form
+  const step3 = await executeStep(page, scenario, 'And', 'the user submits the registration form', async () => {
+    await page.click('button[type="submit"]');
+    await page.waitForTimeout(1500);
+    return { pass: true, detail: 'Form submitted' };
+  });
+
+  // Then: registration is successful
+  const step4 = await executeStep(page, scenario, 'Then', 'the registration is successful', async () => {
+    const currentUrl = page.url();
+    const hasSuccessMessage = await page.locator('.alert-success, .success-message').count() > 0;
+    const redirected = currentUrl !== APP_URL + '/register';
+    return { pass: redirected || hasSuccessMessage, detail: 'URL: ' + currentUrl + (redirected ? ' (redirected)' : '') };
+  });
+
+  // And: user is redirected to the dashboard
+  const step5 = await executeStep(page, scenario, 'And', 'the user is redirected to the dashboard', async () => {
+    const currentUrl = page.url();
+    const isDashboard = currentUrl === APP_URL + '/' || currentUrl.includes('/dashboard');
+    return { pass: isDashboard, detail: 'Dashboard URL: ' + currentUrl };
+  });
+
+  return scenario;
+}
+
+// ─── Scenario: Registration - Duplicate Email ──────────────────
+async function runRegistrationDuplicateEmailScenario(page) {
+  const scenario = {
+    name: 'Registration fails with duplicate email',
+    feature: 'registration.feature',
+    steps: [],
+  };
+
+  await page.context().clearCookies();
+
+  // Given: registration page is displayed
+  const step1 = await executeStep(page, scenario, 'Given', 'the registration page is displayed', async () => {
+    await page.goto(APP_URL + '/register', { waitUntil: 'domcontentloaded', timeout: 10000 });
+    await sleep(500);
+    const hasNameField = await page.locator('#name').count() > 0;
+    return { pass: hasNameField, detail: 'Registration form loaded' };
+  });
+
+  // When: fill in details with existing email
+  const step2 = await executeStep(page, scenario, 'When', 'the user fills in details with an existing email', async () => {
+    await page.fill('#name', 'Existing User');
+    await page.fill('#email', 'existing@example.com');
+    await page.fill('#password', 'SecurePass123');
+    await page.fill('#confirmPassword', 'SecurePass123');
+    return { pass: true, detail: 'Form filled with duplicate email' };
+  });
+
+  // And: submit the registration form
+  const step3 = await executeStep(page, scenario, 'And', 'the user submits the registration form', async () => {
+    await page.click('button[type="submit"]');
+    await page.waitForTimeout(1500);
+    return { pass: true, detail: 'Form submitted' };
+  });
+
+  // Then: error message about duplicate email is shown
+  const step4 = await executeStep(page, scenario, 'Then', 'an error message about duplicate email is shown', async () => {
+    const errorLocator = page.locator('.field-error, .alert-error, .error-message').first();
+    const errorText = await errorLocator.textContent().catch(() => '');
+    const hasError = errorText.toLowerCase().includes('email') || 
+                     errorText.toLowerCase().includes('already') ||
+                     errorText.toLowerCase().includes('exists') ||
+                     (await page.locator('.field-error').count()) > 0;
+    return { pass: hasError, detail: 'Error message: ' + errorText };
+  });
+
+  // And: user remains on the registration page
+  const step5 = await executeStep(page, scenario, 'And', 'the user remains on the registration page', async () => {
+    const currentUrl = page.url();
+    const onRegistrationPage = currentUrl === APP_URL + '/register';
+    const formStillVisible = await page.locator('#email').count() > 0;
+    return { pass: onRegistrationPage && formStillVisible, detail: 'URL: ' + currentUrl };
+  });
+
+  return scenario;
+}
+
+// ─── Scenario: Registration - Invalid Password ─────────────────
+async function runRegistrationInvalidPasswordScenario(page) {
+  const scenario = {
+    name: 'Registration fails with invalid password',
+    feature: 'registration.feature',
+    steps: [],
+  };
+
+  await page.context().clear();
+
+  // Given: registration page is displayed
+  const step1 = await executeStep(page, scenario, 'Given', 'the registration page is displayed', async () => {
+    await page.goto(APP_URL + '/register', { waitUntil: 'domcontentloaded', timeout: 10000 });
+    await sleep(500);
+    const hasNameField = await page.locator('#name').count() > 0;
+    return { pass: hasNameField, detail: 'Registration form loaded' };
+  });
+
+  // When: fill in details with weak password
+  const step2 = await executeStep(page, scenario, 'When', 'the user fills in details with a weak password', async () => {
+    const timestamp = Date.now();
+    await page.fill('#name', `Test User ${timestamp}`);
+    await page.fill('#email', `weakpass${timestamp}@example.com`);
+    await page.fill('#password', '123');
+    await page.fill('#confirmPassword', '123');
+    return { pass: true, detail: 'Form filled with weak password' };
+  });
+
+  // And: submit the registration form
+  const step3 = await executeStep(page, scenario, 'And', 'the user submits the registration form', async () => {
+    await page.click('button[type="submit"]');
+    await page.waitForTimeout(1500);
+    return { pass: true, detail: 'Form submitted' };
+  });
+
+  // Then: error message about password requirements is shown
+  const step4 = await executeStep(page, scenario, 'Then', 'an error message about password requirements is shown', async () => {
+    const errorLocator = page.locator('.field-error, .alert-error, .error-message').first();
+    const errorText = await errorLocator.textContent().catch(() => '');
+    const hasError = errorText.toLowerCase().includes('password') || 
+                     errorText.toLowerCase().includes('weak') ||
+                     errorText.toLowerCase().includes('characters') ||
+                     errorText.toLowerCase().includes('requirements') ||
+                     (await page.locator('.field-error').count()) > 0;
+    return { pass: hasError, detail: 'Error message: ' + errorText };
+  });
+
+  // And: user remains on the registration page
+  const step5 = await executeStep(page, scenario, 'And', 'the user remains on the registration page', async () => {
+    const currentUrl = page.url();
+    const onRegistrationPage = currentUrl === APP_URL + '/register';
+    const formStillVisible = await page.locator('#email').count() > 0;
+    return { pass: onRegistrationPage && formStillVisible, detail: 'URL: ' + currentUrl };
+  });
+
+  return scenario;
+}
+
+// ─── Scenario: User Flow - Login → View Users → Logout ─────────
+async function runUserFlowValidScenario(page) {
+  const scenario = {
+    name: 'User logs in, views users list, and logs out successfully',
+    feature: 'user-flow.feature',
+    steps: [],
+  };
+
+  await page.context().clearCookies();
+
+  // Given: login page is displayed
+  const step1 = await executeStep(page, scenario, 'Given', 'the login page is displayed', async () => {
+    await page.goto(APP_URL + '/login', { waitUntil: 'domcontentloaded', timeout: 10000 });
+    await sleep(500);
+    const hasEmailField = await page.locator('#email').count() > 0;
+    return { pass: hasEmailField, detail: 'Login page loaded' };
+  });
+
+  // When: enter valid credentials
+  const step2 = await executeStep(page, scenario, 'When', 'the user enters valid credentials', async () => {
+    const timestamp = Date.now();
+    await page.fill('#email', `testuser${timestamp}@example.com`);
+    await page.fill('#password', 'SecurePass123');
+    return { pass: true, detail: 'Valid credentials entered' };
+  });
+
+  // And: submit the login form
+  const step3 = await executeStep(page, scenario, 'And', 'the user submits the login form', async () => {
+    await page.click('button[type="submit"]');
+    await page.waitForTimeout(1500);
+    return { pass: true, detail: 'Login form submitted' };
+  });
+
+  // Then: redirected to users page
+  const step4 = await executeStep(page, scenario, 'Then', 'the user is redirected to the users page', async () => {
+    const currentUrl = page.url();
+    const isUsersPage = currentUrl === APP_URL + '/users';
+    return { pass: isUsersPage, detail: 'Users page URL: ' + currentUrl };
+  });
+
+  // And: user list is displayed correctly
+  const step5 = await executeStep(page, scenario, 'And', 'the user list is displayed correctly', async () => {
+    try {
+      await page.waitForSelector('table.table', { timeout: 5000 });
+      const headers = page.locator('table thead th');
+      const headerCount = await headers.count();
+      const rows = page.locator('table tbody tr');
+      const rowCount = await rows.count();
+      
+      const headerTexts = await headers.allTextContents();
+      const hasName = headerTexts.some(t => t.includes('Name'));
+      const hasEmail = headerTexts.some(t => t.includes('Email'));
+      const hasRole = headerTexts.some(t => t.includes('Role'));
+      
+      return { 
+        pass: headerCount > 0 && rowCount > 0 && hasName && hasEmail && hasRole, 
+        detail: 'Table has ' + headerCount + ' headers, ' + rowCount + ' rows' 
+      };
+    } catch (err) {
+      return { pass: false, detail: 'Table not found: ' + err.message };
+    }
+  });
+
+  // When: click logout button
+  const step6 = await executeStep(page, scenario, 'When', 'the user clicks the logout button', async () => {
+    const logoutButton = page.locator('button:has-text("Logout"), button:has-text("logout")').first();
+    const count = await logoutButton.count();
+    if (count > 0) {
+      await logoutButton.click();
+      await page.waitForTimeout(1000);
+      return { pass: true, detail: 'Logout button clicked' };
+    }
+    return { pass: false, detail: 'Logout button not found' };
+  });
+
+  // Then: user is logged out successfully
+  const step7 = await executeStep(page, scenario, '', 'the user logged out successfully', async () => { currentUrl = page.url();
+    const isLoginPage = currentUrl === APP_URL + '/login';
+    const hasEmailField = await page.locator('#email').count() > 0;
+    const hasPasswordField = await page.locator('#password').count() > 0;
+    return { 
+      pass: isLoginPage && hasEmailField && hasPasswordField, 
+      detail: 'URL: ' + currentUrl + (isLoginPage ? ' (login page)' : '') 
+    };
+  });
+
+  // And: redirected to login page
+  const step8 = await executeStep(page, scenario, 'And', 'the user is redirected to the login page', async () => {
+    const currentUrl = page.url();
+    const isLoginPage = currentUrl === APP_URL + '/login';
+    return { pass: isLoginPage, detail: 'Login page URL: ' + currentUrl };
+  });
+
+  return scenario;
+}
+
+// ─── Scenario: User Flow - Invalid Credentials ──────────────────
+async function runUserFlowInvalidCredentialsScenario(page) {
+  const scenario = {
+    name: 'Login fails with invalid credentials',
+    feature: 'user-flow.feature',
+    steps: [],
+  };
+
+  await page.context().clearCookies();
+
+  // Given: login page is displayed
+  const step1 = await executeStep(page, scenario, 'Given', 'the login page is displayed', async () => {
+    await page.goto(APP_URL + '/login', { waitUntil: 'domcontentloaded', timeout: 10000 });
+    await sleep(500);
+    const hasEmailField = await page.locator('#email').count() > 0;
+    return { pass: hasEmailField, detail: 'Login page loaded' };
+  });
+
+  // When: enter invalid credentials
+  const step2 = await executeStep(page, scenario, 'When', 'the user enters invalid credentials', async () => {
+    await page.fill('#email', 'invalid@example.com');
+    await page.fill('#password', 'wrongpassword');
+    return { pass: true, detail: 'Invalid credentials entered' };
+  });
+
+  // And: submit the login form
+  const step3 = await executeStep(page, scenario, 'And', 'the user submits the login form', async () => {
+    await page.click('button[type="submit"]');
+    await page.waitForTimeout(1500);
+    return { pass: true, detail: 'Login form submitted' };
+  });
+
+  // Then: error message about invalid credentials is shown
+  const step4 = await executeStep(page, scenario, 'Then', 'an error message about invalid credentials is shown', async () => {
+    const errorLocator = page.locator('.alert-error, .error-message').first();
+    const errorText = await errorLocator.textContent().catch(() => '');
+    const hasError = errorText.toLowerCase().includes('invalid') || 
+                     errorText.toLowerCase().includes('credentials') ||
+                     errorText.toLowerCase().includes('try again') ||
+                     (await page.locator('.alert-error').count()) > 0;
+    return { pass: hasError, detail: 'Error message: ' + errorText };
+  });
+
+  // And: user remains on the login page
+  const step5 = await executeStep(page, scenario, 'And', 'the user remains on the login page', async () => {
+    const currentUrl = page.url();
+    const onLoginPage = currentUrl === APP_URL + '/login';
+    const hasEmailField = await page.locator('#email').count() > 0;
+    const hasPasswordField = await page.locator('#password').count() > 0;
+    return { 
+      pass: onLoginPage && hasEmailField && hasPasswordField, 
+      detail: 'URL: ' + currentUrl + (onLoginPage ? ' (login page)' : '') 
+    };
+  });
+
+  return scenario;
+}
+
 // ─── Scenario: Onboarding ──────────────────────────────────────
 async function runOnboardingScenario(page) {
   const scenario = {
@@ -237,7 +558,7 @@ async function runOnboardingScenario(page) {
 
   // Given: registration page accessible
   const step1 = await executeStep(page, scenario, 'Given', 'the registration page is accessible', async () => {
-    await page.goto(APP_URL + '/register', { waitUntil: 'domcontentloaded', timeout: 10000 });
+    await page.goto(APP_URL + '/register', { waitUntil: 'contentloaded', timeout: 10000 });
     await sleep(500);
     const title = await page.title();
     return { pass: title.includes('Test'), detail: 'Registration page loaded' };
@@ -344,6 +665,255 @@ async function runOnboardingScenario(page) {
   return scenario;
 }
 
+// ─── Scenario: Order Flow - Create & Update Status ─────────────
+async function runOrderFlowCreateAndUpdateScenario(page) {
+  const scenario = {
+    name: 'User creates a new order and updates its status',
+    feature: 'order-flow.feature',
+    steps: [],
+  };
+
+  await page.context().clearCookies();
+
+  // Given: orders page is displayed
+  const step1 = await executeStep(page, scenario, 'Given', 'the orders page is displayed', async () => {
+    await page.goto(APP_URL + '/orders', { waitUntil: 'domcontentloaded', timeout: 10000 });
+    await sleep(500);
+    const hasOrdersHeading = await page.locator('h1:has-text("Orders")').count() > 0;
+    return { pass: hasOrdersHeading, detail: 'Orders page loaded' };
+  });
+
+  // When: click "New Order" button
+  const step2 = await executeStep(page, scenario, 'When', 'the user clicks the "New Order" button', async () => {
+    const newOrderButton = page.locator('button:has-text("New Order"), button:has-text("+ New Order")').first();
+    const isVisible = await newOrderButton.isVisible().catch(() => false);
+    if (isVisible) {
+      await newOrderButton.click();
+      await page.waitForTimeout(500);
+      return { pass: true, detail: 'New Order button clicked' };
+    }
+    return { pass: false, detail: 'New Order button not found' };
+  });
+
+  // And: fill in valid order details
+  const step3 = await executeStep(page, scenario, 'And', 'the user fills in valid order details', async () => {
+    const timestamp = Date.now();
+    await page.fill('input[placeholder="Product name"]', `Test Product ${timestamp}`);
+    await page.fill('input[type="number"][min="1"]', '2');
+    await page.fill('input[placeholder="0.00"]', '49.99');
+    return { pass: true, detail: 'Order form filled with valid data' };
+  });
+
+  // And: submit the order creation form
+  const step4 = await executeStep(page, scenario, 'And', 'the user submits the order creation form', async () => {
+    const submitButton = page.locator('button[type="submit"]').first();
+    await submitButton.click();
+    await page.waitForTimeout(1000);
+    return { pass: true, detail: 'Order form submitted' };
+  });
+
+  // Then: order appears in the order list
+  const step5 = await executeStep(page, scenario, 'Then', 'the order appears in the order list', async () => {
+    try {
+      await page.waitForSelector('table.table', { timeout: 5000 });
+      const rows = page.locator('table tbody tr');
+      const rowCount = await rows.count();
+      return { pass: rowCount > 0, detail: 'Order list has ' + rowCount + ' rows' };
+    } catch (err) {
+      return { pass: false, detail: 'Order table not found: ' + err.message };
+    }
+  });
+
+  // And: order status is "PENDING"
+  const step6 = await executeStep(page, scenario, 'And', 'the order status is "PENDING"', async () => {
+    const pendingStatus = page.locator('text=PENDING').first();
+    const isVisible = await pendingStatus.isVisible({ timeout: 3000 }).catch(() => false);
+    return { pass: isVisible, detail: 'PENDING status visible: ' + isVisible };
+  });
+
+  // When: update order status to "CONFIRMED"
+  const step7 = await executeStep(page, scenario, 'When', 'the user updates the order status to "CONFIRMED"', async () => {
+    const confirmButton = page.locator('button:has-text("Move to CONFIRMED")').first();
+    const isVisible = await confirmButton.isVisible().catch(() => false);
+    
+    if (isVisible) {
+      await confirmButton.click();
+      await page.waitForTimeout(1000);
+      return { pass: true, detail: 'Status update button clicked' };
+    }
+    
+    // Try any status update button
+    const anyStatusButton = page.locator('button:has-text("Move to")').first();
+    if (await anyStatusButton.count() > 0) {
+      await anyStatusButton.click();
+      await page.waitForTimeout(1000);
+      return { pass: true, detail: 'Generic status update button clicked' };
+    }
+    return { pass: false, detail: 'No status update button found' };
+  });
+
+  // Then: status changes to "CONFIRMED"
+  const step8 = await executeStep(page, scenario, 'Then', 'the status changes to "CONFIRMED"', async () => {
+    const confirmedStatus = page.locator('text=CONFIRMED').first();
+    const isVisible = await confirmedStatus.isVisible({ timeout: 3000 }).catch(() => false);
+    return { pass: isVisible, detail: 'CONFIRMED status visible: ' + isVisible };
+  });
+
+  // And: status change is reflected in the UI
+  const step9 = await executeStep(page, scenario, 'And', 'the status change is reflected in the UI', async () => {
+    await page.waitForSelector('table.table', { timeout: 3000 });
+    const statusBadge = page.locator('.badge:has-text("CONFIRMED")');
+    const badgeCount = await statusBadge.count();
+    return { pass: badgeCount > 0, detail: 'CONFIRMED badge count: ' + badgeCount };
+  });
+
+  return scenario;
+}
+
+// ─── Scenario: Order Flow - Validation (Empty Product) ─────────
+async function runOrderFlowValidationEmptyProductScenario(page) {
+  const scenario = {
+    name: 'Order creation fails with empty product name',
+    feature: 'order-flow.feature',
+    steps: [],
+  };
+
+  await page.context().clearCookies();
+
+  // Given: orders page is displayed
+  const step1 = await executeStep(page, scenario, 'Given', 'the orders page is displayed', async () => {
+    await page.goto(APP_URL + '/orders', { waitUntil: 'domcontentloaded', timeout: 10000 });
+    await sleep(500);
+    const hasOrdersHeading = await page.locator('h1:has-text("Orders")').count() > 0;
+    return { pass: hasOrdersHeading, detail: 'Orders page loaded' };
+  });
+
+  // When: click "New Order" button
+  const step2 = await executeStep(page, scenario, 'When', 'the user clicks the "New Order" button', async () => {
+    const newOrderButton = page.locator('button:has-text("New Order"), button:has-text("+ New Order")').first();
+    await newOrderButton.click();
+    await page.waitForTimeout(500);
+    return { pass: true, detail: 'New Order button clicked' };
+  });
+
+  // And: leave product name field empty
+  const step3 = await executeStep(page, scenario, 'And', 'the user leaves the product name field empty', async () => {
+    await page.fill('input[placeholder="Product name"]', '');
+    return { pass: true, detail: 'Product field left empty' };
+  });
+
+  // enter valid quantity and total
+  const step4 = await executeStep(page, scenario, 'And', 'the user enters valid quantity and total', async () => {
+    await page.fill('input[type="number"][min="1"]', '1');
+    await page.fill('input[placeholder="0.00"]', '29.99');
+    return { pass: true, detail: 'Valid quantity and total entered' };
+  });
+
+  // And: submit the order creation form
+  const step5 = await executeStep(page, scenario, 'And', 'the user submits the order creation form', async () => {
+    const submitButton = page.locator('button[type="submit"]').first();
+    await submitButton.click();
+    await page.waitForTimeout(1000);
+    return { pass: true, detail: 'Order form submitted' };
+  });
+
+  // Then: error message about product name is shown
+  const step6 = await executeStep(page, scenario, 'Then', 'an error message about product name is shown', async () => {
+    const errorLocator = page.locator('.field-error, .error-message').first();
+    const errorText = await errorLocator.textContent().catch(() => '');
+    const hasProductError = errorText.toLowerCase().includes('product') || 
+                            errorText.toLowerCase().includes('required') ||
+                            (await page.locator('.field-error').count()) > 0;
+    return { pass: hasProductError, detail: 'Product error message: ' + errorText };
+  });
+
+  // And: order is not created
+  const step7 = await executeStep(page, scenario, 'And', 'the order is not created', async () => {
+    // Modal should still be open
+    const modal = page.locator('.modal:has-text("New Order")');
+    const isModalVisible = await modal.isVisible().catch(() => false);
+    return { pass: isModalVisible, detail: 'Modal still visible (order not created): ' + isModalVisible };
+  });
+
+  return scenario;
+}
+
+// ─── Scenario: Order Flow - Validation (Invalid Quantity) ──────
+async function runOrderFlowValidationInvalidQuantityScenario(page) {
+  const scenario = {
+    name: 'Order creation fails with invalid quantity',
+    feature: 'order-flow.feature',
+    steps: [],
+  };
+
+  await page.context().clearCookies();
+
+  // Given: orders page is displayed
+  const step1 = await executeStep(page, scenario, 'Given', 'the orders page is displayed', async () => {
+    await page.goto(APP_URL + '/orders', { waitUntil: 'domcontentloaded', timeout: 10000 });
+    await sleep(500);
+    const hasOrdersHeading = await page.locator('h1:has-text("Orders")').count() > 0;
+    return { pass: hasOrdersHeading, detail: 'Orders page loaded' };
+  });
+
+  // When: click "New Order" button
+  const step2 = await executeStep(page, scenario, 'When', 'the user clicks the "New Order" button', async () => {
+    const newOrderButton = page.locator('button:has-text("New Order"), button:has-text("+ New Order")').first();
+    await newOrderButton.click();
+    await page.waitForTimeout(500);
+    return { pass: true, detail: 'New Order button clicked' };
+  });
+
+  // And: enter a valid product name
+  const step3 = await executeStep(page, scenario, 'And', 'the user enters a valid product name', async () => {
+    const timestamp = Date.now();
+    await page.fill('input[placeholder="Product name"]', `Valid Product ${timestamp}`);
+    return { pass: true, detail: 'Valid product name entered' };
+  });
+
+  // And: enter quantity as zero or negative
+  const step4 = await executeStep(page, scenario, 'And', 'the user enters quantity as zero or negative', async () => {
+    await page.fill('input[type="number"][min="1"]', '0');
+    return { pass: true, detail: 'Invalid quantity (0) entered' };
+  });
+
+  // And: enter a valid total
+  const step5 = await executeStep(page, scenario, 'And', 'the user enters a valid total', async () => {
+    await page.fill('input[placeholder="0.00"]', '19.99');
+    return { pass: true, detail: 'Valid total entered' };
+  });
+
+  // And: submit the order creation form
+  const step6 = await executeStep(page, scenario, 'And', 'the user submits the order creation form', async () => {
+    const submitButton = page.locator('button[type="submit"]').first();
+    await submitButton.click();
+    await page.waitForTimeout(1000);
+    return { pass: true, detail: 'Order form submitted' };
+  });
+
+  // Then: error message about quantity is shown
+  const step7 = await executeStep(page, scenario, 'Then', 'an error message about quantity is shown', async () => {
+    const errorLocator = page.locator('.field-error, .error-message').first();
+    const errorText = await errorLocator.textContent().catch(() => '');
+    const hasQuantityError = errorText.toLowerCase().includes('quantity') || 
+                             errorText.toLowerCase().includes('must be') ||
+                             errorText.toLowerCase().includes('>= 1') ||
+                             errorText.toLowerCase().includes('positive') ||
+                             (await page.locator('.field-error').count()) > 0;
+    return { pass: hasQuantityError, detail: 'Quantity error message: ' + errorText };
+  });
+
+  // And: order is not created
+  const step8 = await executeStep(page, scenario, 'And', 'the order is not created', async () => {
+    // Modal should still be open
+    const modal = page.locator('.modal:has-text("New Order")');
+    const isModalVisible = await modal.isVisible().catch(() => false);
+    return { pass: isModalVisible, detail: 'Modal still visible (order not created): ' + isModalVisible };
+  });
+
+  return scenario;
+}
+
 // ─── Helper: Execute single step with screenshot ────────────────
 async function executeStep(page, scenario, keyword, description, actionFn) {
   const scenarioNum = testResults.scenarios.length + 1;
@@ -398,27 +968,91 @@ function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
       ignoreHTTPSErrors: true,
     });
 
-    // Scenario 1: Error Handling
+    // Scenario 1: Registration - Valid Data
     {
       const page = await context.newPage();
-      console.log('Running Scenario 1: Error Handling...');
+      console.log('Running Scenario 1: Registration - Valid Data...');
+      testResults.scenarios.push(await runRegistrationValidScenario(page));
+      await page.close();
+    }
+
+    // Scenario 2: Registration - Duplicate Email
+    {
+      const page = await context.newPage();
+      console.log('Running Scenario 2: Registration - Duplicate Email...');
+      testResults.scenarios.push(await runRegistrationDuplicateEmailScenario(page));
+      await page.close();
+    }
+
+    // Scenario 3: Registration - Invalid Password
+    {
+      const page = await context.newPage();
+      console.log('Running Scenario 3: Registration - Invalid Password...');
+      testResults.scenarios.push(await runRegistrationInvalidPasswordScenario(page));
+      await page.close();
+    }
+
+    // Scenario 4: Error Handling
+    {
+      const page = await context.newPage();
+      console.log('Running Scenario 4: Error Handling...');
       testResults.scenarios.push(await runErrorHandlingScenario(page));
       await page.close();
     }
 
-    // Scenario 2: Admin Flow
+    // Scenario 5: Admin Flow
     {
       const page = await context.newPage();
-      console.log('Running Scenario 2: Admin Flow...');
+      console.log('Running Scenario 5: Admin Flow...');
       testResults.scenarios.push(await runAdminFlowScenario(page));
       await page.close();
     }
 
-    // Scenario 3: Onboarding
+    // Scenario 6: Onboarding
     {
       const page = await context.newPage();
-      console.log('Running Scenario 3: Onboarding...');
+      console.log('Running Scenario 6: Onboarding...');
       testResults.scenarios.push(await runOnboardingScenario(page));
+      await page.close();
+    }
+
+    // Scenario 7: User Flow - Valid Login → View Users → Logout
+    {
+      const page = await context.newPage();
+      console.log('Running Scenario 7: User Flow - Login → View Users → Logout...');
+      testResults.scenarios.push(await runUserFlowValidScenario(page));
+      await page.close();
+    }
+
+    // Scenario 8: User Flow - Invalid Credentials
+    {
+      const page = await context.newPage();
+      console.log('Running Scenario 8: User Flow - Invalid Credentials...');
+      testResults.scenarios.push(await runUserFlowInvalidCredentialsScenario(page));
+      await page.close();
+    }
+
+    // Scenario 9: Order Flow - Create & Update Status
+    {
+      const page = await context.newPage();
+      console.log('Running Scenario 9: Order Flow - Create & Update Status...');
+      testResults.scenarios.push(await runOrderFlowCreateAndUpdateScenario(page));
+      await page.close();
+    }
+
+    // Scenario 10: Order Flow - Validation (Empty Product)
+    {
+      const page = await context.newPage();
+      console.log('Running Scenario 10: Order Flow - Validation (Empty Product)...');
+      testResults.scenarios.push(await runOrderFlowValidationEmptyProductScenario(page));
+      await page.close();
+    }
+
+    // Scenario 11: Order Flow - Validation (Invalid Quantity)
+    {
+      const page = await context.newPage();
+      console.log('Running Scenario 11: Order Flow - Validation (Invalid Quantity)...');
+      testResults.scenarios.push(await runOrderFlowValidationInvalidQuantityScenario(page));
       await page.close();
     }
 

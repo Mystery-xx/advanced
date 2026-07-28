@@ -5,6 +5,7 @@ import com.example.userservice.dto.UserDTO;
 import com.example.userservice.entity.User;
 import com.example.userservice.repository.UserRepository;
 import com.example.userservice.service.UserService;
+import com.example.userservice.util.PasswordUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -28,6 +29,8 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserDTO createUser(CreateUserRequest request) {
         log.info("Creating user with username: {}", request.getUsername());
+
+        PasswordUtil.validatePassword(request.getPassword());
 
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new IllegalArgumentException("Username already exists: " + request.getUsername());
