@@ -10,12 +10,14 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "orders", indexes = {
-    @Index(name = "idx_order_user_id", columnList = "userId"),
+    @Index(name = "idx_order_user_id", columnList = "user_id"),
     @Index(name = "idx_order_status", columnList = "status"),
-    @Index(name = "idx_order_created_at", columnList = "createdAt")
+    @Index(name = "idx_order_created_at", columnList = "created_at")
 })
 @Data
 @NoArgsConstructor
@@ -54,6 +56,10 @@ public class Order {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Instant updatedAt;
+
+    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<OrderStatusHistory> statusHistory = new ArrayList<>();
 
     public enum OrderStatus {
         PENDING,

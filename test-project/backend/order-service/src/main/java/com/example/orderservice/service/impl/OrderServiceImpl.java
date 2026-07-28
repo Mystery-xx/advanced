@@ -2,8 +2,11 @@ package com.example.orderservice.service.impl;
 
 import com.example.orderservice.dto.CreateOrderRequest;
 import com.example.orderservice.dto.OrderDTO;
+import com.example.orderservice.dto.OrderStatusHistoryDTO;
 import com.example.orderservice.entity.Order;
+import com.example.orderservice.entity.OrderStatusHistory;
 import com.example.orderservice.repository.OrderRepository;
+import com.example.orderservice.repository.OrderStatusHistoryRepository;
 import com.example.orderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +26,7 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
+    private final OrderStatusHistoryRepository orderStatusHistoryRepository;
 
     @Override
     @Transactional
@@ -38,6 +42,9 @@ public class OrderServiceImpl implements OrderService {
             .build();
 
         Order savedOrder = orderRepository.save(order);
+        
+        recordStatusChange(savedOrder.getId(), null, Order.OrderStatus.PENDING.name(), request.getUserId());
+        
         log.info("Order created with id: {}", savedOrder.getId());
 
         return OrderDTO.fromEntity(savedOrder);
@@ -71,10 +78,18 @@ public class OrderServiceImpl implements OrderService {
 
         try {
             Order.OrderStatus newStatus = Order.OrderStatus.valueOf(status.toUpperCase());
-            order.setStatus(newStatus);
-            Order updatedOrder = orderRepository.save(order);
-            log.info("Order status updated to {}", newStatus);
-            return OrderDTO.fromEntity(updatedOrder);
+            Order.OrderStatus oldStatus = order.getStatus();
+            
+            if (oldStatus != newStatus) {
+                order.setStatus(newStatus);
+                Order updatedOrder = orderRepository.save(order);
+                recordStatusChange(id, oldStatus.name(), newStatus.name(), null);
+                log.info("Order status updated from {} to {}", oldStatus, newStatus);
+                return OrderDTO.fromEntity(updatedOrder);
+            }
+            
+            log.info("Order status unchanged: {}", newStatus);
+            return OrderDTO.fromEntity(order);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid order status: " + status +
                 ". Valid statuses: " + Arrays.toString(Order.OrderStatus.values()));
@@ -98,8 +113,10 @@ public class OrderServiceImpl implements OrderService {
             throw new IllegalArgumentException("Cannot cancel order that has been shipped");
         }
 
+        Order.OrderStatus oldStatus = order.getStatus();
         order.setStatus(Order.OrderStatus.CANCELLED);
         Order cancelledOrder = orderRepository.save(order);
+        recordStatusChange(id, oldStatus.name(), Order.OrderStatus.CANCELLED.name(), null);
         log.info("Order cancelled successfully");
 
         return OrderDTO.fromEntity(cancelledOrder);
@@ -114,5 +131,23 @@ public class OrderServiceImpl implements OrderService {
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid order status: " + status);
         }
+    }
+
+    @Override
+    public Page<OrderStatusHistoryDTO> getOrderHistory(Long orderId, Pageable pageable) {
+        log.debug("Getting order history for orderId: {}", orderId);
+        return orderStatusHistoryRepository.findByOrderIdOrderByTimestampDesc(orderId, pageable)
+            .map(OrderStatusHistoryDTO::fromEntity);
+    }
+
+    private void recordStatusChange(Long orderId, String oldStatus, String newStatus, String changedBy) {
+        OrderStatusHistory history = OrderStatusHistory.builder()
+            .orderId(orderId)
+            .oldStatus(oldStatus)
+            .newStatus(newStatus)
+            .changedBy(changedBy)
+            .build();
+        orderStatusHistoryRepository.save(history);
+        log.debug("Recorded status change for order {}: {} -> {}", orderId, oldStatus, newStatus);
     }
 }

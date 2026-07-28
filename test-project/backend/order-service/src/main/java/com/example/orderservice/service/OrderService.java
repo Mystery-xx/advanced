@@ -2,6 +2,7 @@ package com.example.orderservice.service;
 
 import com.example.orderservice.dto.CreateOrderRequest;
 import com.example.orderservice.dto.OrderDTO;
+import com.example.orderservice.dto.OrderStatusHistoryDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -22,4 +23,6 @@ public interface OrderService {
     OrderDTO cancelOrder(Long id);
 
     Page<OrderDTO> getOrdersByStatus(String status, Pageable pageable);
+
+    Page<OrderStatusHistoryDTO> getOrderHistory(Long orderId, Pageable pageable);
 }

@@ -2,6 +2,7 @@ package com.example.orderservice.controller;
 
 import com.example.orderservice.dto.CreateOrderRequest;
 import com.example.orderservice.dto.OrderDTO;
+import com.example.orderservice.dto.OrderStatusHistoryDTO;
 import com.example.orderservice.dto.UpdateStatusRequest;
 import com.example.orderservice.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -107,5 +108,15 @@ public class OrderController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @GetMapping("/{id}/history")
+    @Operation(summary = "Get order status history", description = "Retrieves the status change history for an order")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    public ResponseEntity<Page<OrderStatusHistoryDTO>> getOrderHistory(
+            @Parameter(description = "Order ID") @PathVariable Long id,
+            @PageableDefault(size = 20) Pageable pageable) {
+        log.info("GET /api/orders/{}/history - Retrieving order status history", id);
+        return ResponseEntity.ok(orderService.getOrderHistory(id, pageable));
     }
 }
