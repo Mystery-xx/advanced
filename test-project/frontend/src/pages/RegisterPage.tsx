@@ -9,6 +9,12 @@ interface FormErrors {
   confirmPassword?: string;
 }
 
+interface PasswordRequirements {
+  hasLetter: boolean;
+  hasNumber: boolean;
+  hasMinLength: boolean;
+}
+
 function validateName(name: string): string | undefined {
   if (!name.trim()) return 'Name is required';
   if (name.trim().length < 2) return 'Name must be at least 2 characters';
@@ -28,6 +34,14 @@ function validatePassword(password: string): string | undefined {
   return undefined;
 }
 
+function checkPasswordRequirements(password: string): PasswordRequirements {
+  return {
+    hasLetter: /[A-Za-z]/.test(password),
+    hasNumber: /\d/.test(password),
+    hasMinLength: password.length >= 6,
+  };
+}
+
 export default function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -36,6 +50,8 @@ export default function RegisterPage() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState('');
+  const passwordRequirements = checkPasswordRequirements(password);
+  const isPasswordValid = passwordRequirements.hasLetter && passwordRequirements.hasNumber && passwordRequirements.hasMinLength;
   const { register } = useAuth();
   const navigate = useNavigate();
 
@@ -61,6 +77,14 @@ export default function RegisterPage() {
       setApiError('Registration failed. Try again.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+    if (errors.password) {
+      const newError = validatePassword(e.target.value);
+      setErrors(prev => ({ ...prev, password: newError }));
     }
   };
 
@@ -107,12 +131,28 @@ export default function RegisterPage() {
               id="password"
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handlePasswordChange}
               className={errors.password ? 'input-error' : ''}
               placeholder="Min 6 chars, letters & numbers"
               autoComplete="new-password"
             />
             {errors.password && <span className="field-error">{errors.password}</span>}
+            {password.length > 0 && (
+              <div className="password-requirements">
+                <div className={`requirement ${passwordRequirements.hasMinLength ? 'met' : 'unmet'}`}>
+                  <span className="requirement-icon">{passwordRequirements.hasMinLength ? '✓' : '✗'}</span>
+                  <span>At least 6 characters</span>
+                </div>
+                <div className={`requirement ${passwordRequirements.hasLetter ? 'met' : 'unmet'}`}>
+                  <span className="requirement-icon">{passwordRequirements.hasLetter ? '✓' : '✗'}</span>
+                  <span>At least one letter</span>
+                </div>
+                <div className={`requirement ${passwordRequirements.hasNumber ? 'met' : 'unmet'}`}>
+                  <span className="requirement-icon">{passwordRequirements.hasNumber ? '✓' : '✗'}</span>
+                  <span>At least one number</span>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="form-group">
@@ -129,7 +169,7 @@ export default function RegisterPage() {
             {errors.confirmPassword && <span className="field-error">{errors.confirmPassword}</span>}
           </div>
 
-          <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
+          <button type="submit" className="btn btn-primary btn-block" disabled={loading || !isPasswordValid}>
             {loading ? 'Creating account...' : 'Create Account'}
           </button>
         </form>
