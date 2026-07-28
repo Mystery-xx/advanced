@@ -1,0 +1,31 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "providers": {
+    "local": {
+      "endpoint": "http://localhost:11434/v1",
+      "apiKey": "ollama"
+    }
+  },
+  "agents": {
+    "coder": {
+      "model": "local.llama3.1:8b-instruct-q4_K_M",
+      "systemPrompt": ".opencode/system-prompt.md",
+      "reasoningEffort": "medium",
+      "temperature": 0.3
+    },
+    "bug-fix": {
+      "extends": "coder",
+      "model": "local.llama3.1:8b-instruct-q4_K_M",
+      "systemPrompt": ".opencode/system-prompt.md",
+      "reasoningEffort": "high",
+      "temperature": 0.2
+    },
+    "research": {
+      "extends": "coder",
+      "model": "local.llama3.1:8b-instruct-q4_K_M",
+      "systemPrompt": ".opencode/system-prompt.md",
+      "reasoningEffort": "high",
+      "temperature": 0.4
+    }
+  }
+}
