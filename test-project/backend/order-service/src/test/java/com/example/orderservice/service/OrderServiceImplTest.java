@@ -260,6 +260,6 @@ class OrderServiceImplTest {
             () -> orderService.cancelOrder(1L)
         );
 
-        assertEquals("Cannot cancel order that has been shipped", exception.getMessage());
+        assertEquals("Cannot cancel order that has been shipped or refunded", exception.getMessage());
     }
 }

@@ -109,8 +109,9 @@ public class OrderServiceImpl implements OrderService {
         }
 
         if (order.getStatus() == Order.OrderStatus.SHIPPED ||
-            order.getStatus() == Order.OrderStatus.DELIVERED) {
-            throw new IllegalArgumentException("Cannot cancel order that has been shipped");
+            order.getStatus() == Order.OrderStatus.DELIVERED ||
+            order.getStatus() == Order.OrderStatus.REFUNDED) {
+            throw new IllegalArgumentException("Cannot cancel order that has been shipped or refunded");
         }
 
         Order.OrderStatus oldStatus = order.getStatus();
