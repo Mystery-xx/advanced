@@ -1,6 +1,7 @@
 import { useState, useEffect, type FormEvent } from 'react';
 import { getUsers, createUser, updateUser, deleteUser } from '../services/api';
 import type { User } from '../types';
+import Spinner from '../components/Spinner';
 
 interface UserForm {
   name: string;
@@ -118,7 +119,12 @@ export default function UsersPage() {
     }
   };
 
-  if (loading) return <div className="page-loading">Loading users...</div>;
+  if (loading) return (
+    <div className="page-loading">
+      <Spinner size="lg" ariaLabel="Loading users" />
+      <span>Loading users...</span>
+    </div>
+  );
 
   return (
     <div className="page">
@@ -190,7 +196,16 @@ export default function UsersPage() {
               </div>
               <div className="modal-actions">
                 <button type="button" className="btn btn-outline" onClick={() => setShowModal(false)}>Cancel</button>
-                <button type="submit" className="btn btn-primary" disabled={saving}>{saving ? 'Saving...' : 'Save'}</button>
+                <button type="submit" className="btn btn-primary" disabled={saving}>
+                {saving ? (
+                  <>
+                    <Spinner size="sm" ariaLabel="Saving" />
+                    <span>Saving...</span>
+                  </>
+                ) : (
+                  'Save'
+                )}
+              </button>
               </div>
             </form>
           </div>

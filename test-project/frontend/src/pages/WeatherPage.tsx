@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { getWeather } from '../services/api';
 import type { WeatherData } from '../types';
+import Spinner from '../components/Spinner';
 
 const popularCities = ['London', 'New York', 'Tokyo', 'Paris', 'Sydney', 'Moscow', 'Dubai', 'Singapore'];
 
@@ -64,7 +65,14 @@ export default function WeatherPage() {
             className="weather-input"
           />
           <button type="submit" className="btn btn-primary" disabled={loading}>
-            {loading ? 'Searching...' : 'Get Weather'}
+            {loading ? (
+              <>
+                <Spinner size="sm" ariaLabel="Searching weather" />
+                <span>Searching...</span>
+              </>
+            ) : (
+              'Get Weather'
+            )}
           </button>
         </form>
 
@@ -76,7 +84,14 @@ export default function WeatherPage() {
               onClick={() => fetchWeather(c)}
               disabled={loading}
             >
-              {c}
+              {loading && weather?.city === c ? (
+                <>
+                  <Spinner size="sm" ariaLabel={`Loading ${c}`} />
+                  <span>{c}</span>
+                </>
+              ) : (
+                c
+              )}
             </button>
           ))}
         </div>

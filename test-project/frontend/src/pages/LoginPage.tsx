@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import Spinner from '../components/Spinner';
 
 interface FormErrors {
   email?: string;
@@ -90,7 +91,14 @@ export default function LoginPage() {
           </div>
 
           <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? (
+              <>
+                <Spinner size="sm" ariaLabel="Signing in" />
+                <span>Signing in...</span>
+              </>
+            ) : (
+              'Sign In'
+            )}
           </button>
         </form>
 

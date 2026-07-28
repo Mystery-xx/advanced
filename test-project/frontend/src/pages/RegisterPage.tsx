@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import Spinner from '../components/Spinner';
 
 interface FormErrors {
   name?: string;
@@ -170,7 +171,14 @@ export default function RegisterPage() {
           </div>
 
           <button type="submit" className="btn btn-primary btn-block" disabled={loading || !isPasswordValid}>
-            {loading ? 'Creating account...' : 'Create Account'}
+            {loading ? (
+              <>
+                <Spinner size="sm" ariaLabel="Creating account" />
+                <span>Creating account...</span>
+              </>
+            ) : (
+              'Create Account'
+            )}
           </button>
         </form>
 

@@ -2,6 +2,7 @@ import { useState, useEffect, type FormEvent } from 'react';
 import { getOrders, createOrder, updateOrderStatus } from '../services/api';
 import { useAuth } from '../hooks/useAuth';
 import type { Order } from '../types';
+import Spinner from '../components/Spinner';
 
 const statusColors: Record<Order['status'], string> = {
   PENDING: 'warning',
@@ -112,7 +113,12 @@ export default function OrdersPage() {
     return flow[current];
   };
 
-  if (loading) return <div className="page-loading">Loading orders...</div>;
+  if (loading) return (
+    <div className="page-loading">
+      <Spinner size="lg" ariaLabel="Loading orders" />
+      <span>Loading orders...</span>
+    </div>
+  );
 
   return (
     <div className="page">
@@ -150,8 +156,16 @@ export default function OrdersPage() {
                       <button
                         className="btn btn-sm btn-outline"
                         onClick={() => handleStatusChange(order.id, next)}
+                        disabled={saving}
                       >
-                        Move to {next}
+                        {saving ? (
+                          <>
+                            <Spinner size="sm" ariaLabel="Updating status" />
+                            <span>Updating...</span>
+                          </>
+                        ) : (
+                          `Move to ${next}`
+                        )}
                       </button>
                     ) : (
                       <span className="text-muted">—</span>
@@ -207,7 +221,16 @@ export default function OrdersPage() {
               </div>
               <div className="modal-actions">
                 <button type="button" className="btn btn-outline" onClick={() => setShowCreate(false)}>Cancel</button>
-                <button type="submit" className="btn btn-primary" disabled={saving}>{saving ? 'Creating...' : 'Create Order'}</button>
+                <button type="submit" className="btn btn-primary" disabled={saving}>
+                {saving ? (
+                  <>
+                    <Spinner size="sm" ariaLabel="Creating order" />
+                    <span>Creating...</span>
+                  </>
+                ) : (
+                  'Create Order'
+                )}
+              </button>
               </div>
             </form>
           </div>
