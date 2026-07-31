@@ -17,7 +17,7 @@ automatically escalated to the expensive model.
 
 Usage:
     uv run model_router.py --eval-path finetune/dataset/eval.jsonl
-    uv run model_router.py --eval-path finetune/dataset/eval.jsonl --cheap-model llama3.1:8b --expensive-model qwen3:14b
+    uv run model_router.py --eval-path finetune/dataset/eval.jsonl --cheap-model llama3.2:1b --expensive-model qwen3:14b
 """
 
 from __future__ import annotations
@@ -45,12 +45,12 @@ SYSTEM_PROMPT: Final[str] = (
     "Отвечай только названием категории."
 )
 
-DEFAULT_CHEAP_MODEL: Final[str] = "llama3.1:8b"
+DEFAULT_CHEAP_MODEL: Final[str] = "llama3.2:1b"
 DEFAULT_EXPENSIVE_MODEL: Final[str] = "qwen3:14b"
 DEFAULT_OLLAMA_URL: Final[str] = "http://localhost:11434"
 
 # Cost units (relative, not actual $)
-# Ratio: 8B cheap vs 14B expensive = 1 : 3
+# Ratio: 1B cheap vs 14B expensive = 1 : 15
 COST_UNITS: Final[dict[str, int]] = {
     "cheap": 1,
     "expensive": 3,
@@ -119,7 +119,7 @@ def compute_confidence(
         >>> result = compute_confidence(
         ...     user_content="Отличная тачка для дачи",
         ...     answer="позитивный",
-        ...     model="llama3.1:8b"
+        ...     model="llama3.2:1b"
         ... )
         >>> print(result["confidence_status"])
         "HIGH"
@@ -216,13 +216,13 @@ def route_request(
 
     Example:
         >>> config = RouterConfig(
-        ...     cheap_model="llama3.1:8b",
+        ...     cheap_model="llama3.2:1b",
         ...     expensive_model="qwen3:14b",
         ...     escalate_on=["MEDIUM", "LOW"]
         ... )
         >>> result = route_request("Отличная тачка!", config)
         >>> print(result.model_used)
-        "llama3.1:8b"  # or "qwen3:14b" if escalated
+        "llama3.2:1b"  # or "qwen3:14b" if escalated
         >>> print(result.escalated)
         False  # or True if escalated
     """

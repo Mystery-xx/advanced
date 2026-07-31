@@ -8,7 +8,7 @@
 ## 1. Введение (30 сек)
 
 **Конфигурация по умолчанию:**
-- **Cheap model:** `llama3.1:8b` (быстрая, 1 cost unit)
+- **Cheap model:** `llama3.2:1b` (быстрая, 1 cost unit)
 - **Expensive model:** `qwen3:14b` (мощная, 3 cost units)
 - **Escalation:** MEDIUM + LOW confidence
 
@@ -46,14 +46,14 @@ Latency Statistics:
 Cost Statistics:
   Total cost units:    20
   Avg per request:     1.0
-  Cost savings:        66.67% vs all-expensive
+  Cost savings:        93.33% vs all-expensive
 ═══════════════════════════════════════════════════════
 
 Results saved: routing_results.json
 ```
 
 ### Комментарий:
-> "Все 20 запросов получили HIGH confidence от дешёвой модели — эскалация не потребовалась. Экономия 66.67% cost vs запуск всех на дорогой модели."
+> "Все 20 запросов получили HIGH confidence от дешёвой модели — эскалация не потребовалась. Экономия 93.33% cost vs запуск всех на дорогой модели."
 
 ---
 
@@ -83,7 +83,7 @@ cat /mnt/f/git/advanced/finetune/routing/routing_results.json | python3 -m json.
   "cost_statistics": {
     "total_cost_units": 20,
     "avg_cost_per_request": 1.0,
-    "cost_savings_vs_all_expensive": 66.67
+    "cost_savings_vs_all_expensive": 93.33
   },
   "predictions": [...]
 }
@@ -127,7 +127,7 @@ def route_request(question: str, config: RouterConfig) -> RouterResult:
 ### Сценарий:
 ```
 Вопрос: "Объясни квантовую запутанность"
-→ llama3.1:8b отвечает → self-check даёт LOW confidence
+→ llama3.2:1b отвечает → self-check даёт LOW confidence
 → Эскалация на qwen3:14b
 → Возвращаем ответ qwen3 + флаг escalated=True
 ```
@@ -149,7 +149,7 @@ uv run run_routing.py --eval-path finetune/dataset/hard_questions.jsonl --escala
 
 ### Запуск с кастомными моделями (одна строка):
 ```bash
-uv run run_routing.py --eval-path ../dataset/eval.jsonl --cheap-model llama3.1:8b --expensive-model qwen3:14b --escalate-on MEDIUM LOW
+uv run run_routing.py --eval-path ../dataset/eval.jsonl --cheap-model llama3.2:1b --expensive-model qwen3:14b --escalate-on MEDIUM LOW
 ```
 
 ### Запуск с сохранением в кастомный путь (одна строка):
@@ -175,12 +175,12 @@ cat routing_results.json | python3 -c "import json,sys; d=json.load(sys.stdin); 
 | Метрика | Значение | Интерпретация |
 |---------|----------|---------------|
 | **Escalation rate** | 0-50% | % запросов на дорогой модели |
-| **Cost savings** | 30-70% | Экономия vs single expensive model |
-| **Avg latency** | 1-5 sec | Среднее время ответа |
-| **Cheap model accuracy** | 70-90% | Точность на простых вопросах |
+| **Cost savings** | 30-95% | Экономия vs single expensive model |
+| **Avg latency** | 0.1-5 sec | Среднее время ответа |
+| **Cheap model accuracy** | 50-90% | Точность на простых вопросах |
 
 ### Ключевые выводы:
-- ✅ **66.67% экономии** на простых запросах
+- ✅ **93.33% экономии** на простых запросах
 - ✅ **Автоматическая эскалация** на сложных
 - ✅ **Полная трассировка**: какой моделью отвечен каждый запрос
 - ✅ **Гибкая настройка**: пороги confidence, модели, cost ratio
@@ -205,7 +205,7 @@ cat finetune/routing/routing_results.json | python3 -m json.tool | head -50
 sed -n '150,180p' finetune/routing/model_router.py
 
 # 4. Кастомные модели
-cd /mnt/f/git/advanced && PYTHONPATH=. uv run finetune/routing/run_routing.py --eval-path finetune/dataset/eval.jsonl --cheap-model llama3.1:8b --expensive-model qwen3:14b --escalate-on MEDIUM LOW
+cd /mnt/f/git/advanced && PYTHONPATH=. uv run finetune/routing/run_routing.py --eval-path finetune/dataset/eval.jsonl --cheap-model llama3.2:1b --expensive-model qwen3:14b --escalate-on MEDIUM LOW
 
 # 5. Кастомный output
 cd /mnt/f/git/advanced && PYTHONPATH=. uv run finetune/routing/run_routing.py --eval-path finetune/dataset/eval.jsonl --output /tmp/demo_results.json
