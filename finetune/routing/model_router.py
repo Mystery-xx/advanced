@@ -17,6 +17,7 @@ automatically escalated to the expensive model.
 
 Usage:
     uv run model_router.py --eval-path finetune/dataset/eval.jsonl
+    uv run model_router.py --eval-path finetune/dataset/eval.jsonl --fine-tuned-llama3
     uv run model_router.py --eval-path finetune/dataset/eval.jsonl --cheap-model llama3.2:1b --expensive-model qwen3:14b
 """
 
@@ -49,6 +50,7 @@ SYSTEM_PROMPT: Final[str] = (
 DEFAULT_CHEAP_MODEL: Final[str] = "llama3.1:8b"
 DEFAULT_EXPENSIVE_MODEL: Final[str] = "qwen3:14b"
 DEFAULT_OLLAMA_URL: Final[str] = "http://localhost:11434"
+FINETUNED_LLAMA3_CHEAP_MODEL: Final[str] = "llama3.2:1b"
 
 # Cost units (relative, not actual $)
 # Ratio: 1B cheap vs 14B expensive = 1 : 15
@@ -586,6 +588,7 @@ def parse_args(args: list[str]) -> tuple[Path, RouterConfig]:
     escalate_on: list[str] = ("MEDIUM", "LOW")
     use_self_check: bool = True
     ollama_url: str = DEFAULT_OLLAMA_URL
+    fine_tuned_llama3: bool = False
 
     i = 0
     while i < len(args):
@@ -608,6 +611,12 @@ def parse_args(args: list[str]) -> tuple[Path, RouterConfig]:
             i += 2
         elif arg == "--no-self-check":
             use_self_check = False
+            i += 1
+        elif arg == "--fine-tuned-llama3":
+            # Use fine-tuned llama3.2:1b (from finetune/qlora/train_llama3_1b.py)
+            # Requires: ollama pull llama3.2:1b (or custom model from adapter)
+            fine_tuned_llama3 = True
+            cheap_model = FINETUNED_LLAMA3_CHEAP_MODEL
             i += 1
         else:
             i += 1

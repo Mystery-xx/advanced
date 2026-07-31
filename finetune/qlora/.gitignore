@@ -11,3 +11,4 @@ __pycache__/
 outputs/adapter/
 outputs/merged/
 outputs/checkpoint-*/
+outputs/llama3_1b_adapter/
