@@ -1,0 +1,29 @@
+# QLoRA fine-tuning stack: 4-bit quantized LLM adaptation
+# Model: Qwen2.5-14B-Instruct | GPU: RTX 4080 (16GB VRAM)
+
+# ── Core DL ──
+torch>=2.4,<2.6 --index-url https://download.pytorch.org/whl/cu124
+torchvision --index-url https://download.pytorch.org/whl/cu124
+
+# ── Hugging Face ecosystem ──
+transformers>=4.47,<4.50
+accelerate>=1.2
+peft>=0.14
+bitsandbytes>=0.44,<0.46
+trl>=0.14
+datasets>=3.0
+
+# ── Tokenizers / inference ──
+sentencepiece>=0.2
+protobuf>=5,<6
+safetensors>=0.4
+
+# ── Evaluation ──
+scikit-learn>=1.5
+numpy>=1.26
+rouge-score>=0.1
+
+# ── Utils ──
+rich>=13.9
+tqdm>=4.66
+wandb>=0.18
