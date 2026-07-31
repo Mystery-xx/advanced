@@ -7,7 +7,7 @@ __pycache__/
 *.pyc
 *.pyo
 
-# Large model outputs (not committed to git — ~13GB)
+# Large model outputs (excluded from git — ~13GB model files)
 outputs/adapter/
 outputs/merged/
 outputs/checkpoint-*/

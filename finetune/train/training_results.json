@@ -1,0 +1,14 @@
+{
+  "model": "qwen3:14b",
+  "output_tag": "qwen3:14b-sentiment",
+  "mode": "create",
+  "ollama_version": "0.31.1",
+  "train_samples": 80,
+  "epochs": null,
+  "epoch_losses": [],
+  "duration_secs": 0.02,
+  "eval_accuracy": 0.8,
+  "ollama_url": "http://localhost:11434",
+  "dataset_path": "/mnt/f/git/advanced/test-project/finetune/dataset/train.jsonl",
+  "modelfile": "/mnt/f/git/advanced/test-project/finetune/train/Modelfile"
+}
