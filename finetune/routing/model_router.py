@@ -285,9 +285,11 @@ def route_request(
                     confidence_status = new_confidence_result["confidence_status"]
                     explanation = new_confidence_result["explanation"]
                     constraint_passed = new_confidence_result["constraint_passed"]
-                except Exception:
-                    pass  # Keep original confidence data
-        except Exception:
+                except Exception as e:
+                    console.print(f"[yellow]Warning: Failed to re-compute confidence: {e}[/]")
+                    # Keep original confidence data
+        except Exception as e:
+            console.print(f"[yellow]Warning: Expensive model failed: {e}[/]")
             # Fallback to cheap model if expensive model fails
             pass
 
