@@ -34,6 +34,7 @@ from rich.console import Console
 from rich.table import Table
 
 # Import confidence evaluators from finetune.confidence package
+from finetune.confidence.answer_validation import answer_validation
 from finetune.confidence.constraint_check import constraint_check, LABELED_CATEGORIES
 from finetune.confidence.self_check import self_check
 
@@ -101,6 +102,7 @@ def compute_confidence(
     This function combines:
     1. Self-check: Model explains its answer
     2. Constraint check: Validate answer against allowed categories
+    3. Answer validation: Verify answer matches review sentiment
 
     Args:
         user_content: The review text that was classified
@@ -113,6 +115,8 @@ def compute_confidence(
         - confidence_status (str): "HIGH", "MEDIUM", or "LOW"
         - explanation (str): Model's explanation from self_check
         - constraint_passed (bool): Whether answer passes constraint check
+        - validation_passed (bool): Whether answer matches review sentiment
+        - validation_reason (str): Model's reasoning for validation verdict
         - latency_ms (int): Time taken for confidence evaluation
 
     Example:
@@ -142,11 +146,28 @@ def compute_confidence(
     constraint_result = constraint_check(answer, LABELED_CATEGORIES)
     constraint_passed = constraint_result["passed"]
 
-    # Step 3: Compute confidence status
-    # HIGH: constraint passed + confident explanation
-    # MEDIUM: constraint passed but weak explanation
-    # LOW: constraint failed
-    if not constraint_passed:
+    # Step 3: Answer validation (verify answer matches review sentiment)
+    validation_passed = True
+    validation_reason = ""
+    validation_latency = 0
+    if user_content and user_content.strip():
+        try:
+            validation_result = answer_validation(
+                user_content, answer, model, ollama_url
+            )
+            validation_passed = validation_result["supported"]
+            validation_reason = validation_result["reason"]
+            validation_latency = validation_result["latency_ms"]
+        except Exception as e:
+            validation_passed = True  # Don't penalize on validation timeout
+            validation_reason = f"Error in validation: {str(e)}"
+            validation_latency = 0
+
+    # Step 4: Compute confidence status
+    # LOW: constraint failed OR answer validation failed
+    # HIGH: constraint passed + validation passed + confident explanation
+    # MEDIUM: constraint passed + validation passed but weak explanation
+    if not constraint_passed or not validation_passed:
         confidence_status = "LOW"
     elif explanation and len(explanation) > 20:
         confidence_status = "HIGH"
@@ -159,6 +180,8 @@ def compute_confidence(
         "confidence_status": confidence_status,
         "explanation": explanation,
         "constraint_passed": constraint_passed,
+        "validation_passed": validation_passed,
+        "validation_reason": validation_reason,
         "latency_ms": latency_ms,
     }
 

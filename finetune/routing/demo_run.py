@@ -112,6 +112,60 @@ EXAMPLE_TYPES: Final[list[str]] = [
 ]
 
 
+def compute_raw_confidence(result) -> float:
+    """Derive a raw numeric confidence score (0.0–1.0) from a RouterResult.
+
+    Heuristic:
+    - constraint_passed=False → 0.0–0.3 (LOW)
+    - constraint_passed + short/empty explanation → 0.3–0.65 (MEDIUM)
+    - constraint_passed + long explanation → 0.65–1.0 (HIGH)
+    """
+    if not result.constraint_passed:
+        return 0.0
+    expl_len = len(result.explanation) if result.explanation else 0
+    # Explanation length maps to a score between 0.35 and 1.0
+    base = 0.35
+    score = base + min(expl_len / 200, 0.65)
+    return round(min(score, 1.0), 2)
+
+
+def double_check(
+    user_content: str,
+    answer: str,
+    model: str,
+    ollama_url: str,
+) -> tuple[str, bool]:
+    """Re-run classification with a different temperature to verify the answer.
+
+    Returns:
+        tuple: (second_answer, match) — whether both answers match after normalization.
+    """
+    from finetune.routing.model_router import SYSTEM_PROMPT
+    import requests
+
+    payload = {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": user_content},
+        ],
+        "temperature": 0.7,  # non-zero for variety
+        "stream": False,
+    }
+    try:
+        resp = requests.post(f"{ollama_url}/api/chat", json=payload, timeout=300)
+        resp.raise_for_status()
+        second_answer = resp.json().get("message", {}).get("content", "").strip()
+    except Exception:
+        second_answer = ""
+
+    def norm(s: str) -> str:
+        return s.strip().lower().rstrip(".,!?;:")
+
+    match = bool(second_answer) and norm(second_answer) == norm(answer)
+    return second_answer, match
+
+
 @dataclass
 class DemoResult:
     """Result from running a single demo example."""
@@ -122,6 +176,9 @@ class DemoResult:
     correct: bool        # Whether answer matches expected
     model_used: str      # Which model handled it
     confidence: str      # HIGH / MEDIUM / LOW
+    raw_confidence: float  # Numeric score 0.0–1.0
+    double_check_match: bool | None  # Whether double-check agreed (None if not run)
+    double_check_answer: str | None  # Second run's answer (None if not run)
     escalated: bool      # Was request escalated
     latency_ms: int      # Total latency
     cost_units: int      # Cost units spent
@@ -148,6 +205,17 @@ def run_demo(config: RouterConfig, console: Console) -> list[DemoResult]:
             result = route_request(text, config)
             correct = normalize(result.answer) == normalize(expected)
 
+            # Compute raw confidence score
+            raw_conf = compute_raw_confidence(result)
+
+            # Double-check: re-run with higher temperature if self-check enabled
+            dc_answer: str | None = None
+            dc_match: bool | None = None
+            if config.use_self_check:
+                dc_answer, dc_match = double_check(
+                    text, result.answer, config.cheap_model, config.ollama_url
+                )
+
             demo_result = DemoResult(
                 number=line_num,
                 example_type=example_type,
@@ -156,6 +224,9 @@ def run_demo(config: RouterConfig, console: Console) -> list[DemoResult]:
                 correct=correct,
                 model_used=result.model_used,
                 confidence=result.confidence_status,
+                raw_confidence=raw_conf,
+                double_check_match=dc_match,
+                double_check_answer=dc_answer,
                 escalated=result.escalated,
                 latency_ms=result.latency_ms,
                 cost_units=result.cost_units,
@@ -171,9 +242,12 @@ def run_demo(config: RouterConfig, console: Console) -> list[DemoResult]:
                 f"  [{color}]{status}[/] Expected: [bold]{expected}[/]"
                 f" | Got: [bold]{result.answer}[/]"
             )
+            raw_pct = f"{raw_conf:.0%}"
+            dc_str = f" ✓ Match" if dc_match else (" ✗ Mismatch" if dc_match is False else "")
             console.print(
                 f"  Model: [bold]{result.model_used}[/]{esc}"
                 f" | Confidence: [bold]{result.confidence_status}[/]"
+                f" (raw: {raw_pct}){dc_str}"
                 f" | Cost: {result.cost_units} units"
                 f" | Latency: {result.latency_ms} ms"
             )
@@ -193,6 +267,9 @@ def run_demo(config: RouterConfig, console: Console) -> list[DemoResult]:
                 correct=False,
                 model_used="",
                 confidence="ERROR",
+                raw_confidence=0.0,
+                double_check_match=None,
+                double_check_answer=None,
                 escalated=False,
                 latency_ms=0,
                 cost_units=0,
@@ -213,6 +290,8 @@ def print_summary_table(console: Console, results: list[DemoResult]) -> None:
     table.add_column("Answer", width=18)
     table.add_column("Expected", width=18)
     table.add_column("Conf.", width=8)
+    table.add_column("Raw", width=7)
+    table.add_column("DblChk", width=7)
     table.add_column("Esc.", width=5)
     table.add_column("Correct", width=7)
 
@@ -225,6 +304,13 @@ def print_summary_table(console: Console, results: list[DemoResult]) -> None:
         esc_str = f"[yellow]Y[/]" if r.escalated else "N"
         ans_display = r.answer if r.answer != "ERROR" else "[red]ERROR[/]"
 
+        raw_str = f"{r.raw_confidence:.0%}" if r.raw_confidence > 0 else f"[dim]{r.raw_confidence:.0%}[/]"
+        dc_str = (
+            "[green]✓[/]" if r.double_check_match is True else
+            "[red]✗[/]" if r.double_check_match is False else
+            "[dim]N/A[/]"
+        )
+
         table.add_row(
             str(r.number),
             r.example_type,
@@ -232,6 +318,8 @@ def print_summary_table(console: Console, results: list[DemoResult]) -> None:
             ans_display,
             r.expected,
             r.confidence,
+            raw_str,
+            dc_str,
             esc_str,
             correct_str,
         )
@@ -297,6 +385,9 @@ def save_results(results: list[DemoResult], output_path: Path) -> None:
                 "correct": r.correct,
                 "model_used": r.model_used,
                 "confidence": r.confidence,
+                "raw_confidence": r.raw_confidence,
+                "double_check_match": r.double_check_match,
+                "double_check_answer": r.double_check_answer,
                 "escalated": r.escalated,
                 "latency_ms": r.latency_ms,
                 "cost_units": r.cost_units,
