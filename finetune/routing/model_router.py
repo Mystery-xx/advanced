@@ -17,7 +17,7 @@ automatically escalated to the expensive model.
 
 Usage:
     uv run model_router.py --eval-path finetune/dataset/eval.jsonl
-    uv run model_router.py --eval-path finetune/dataset/eval.jsonl --cheap-model llama3.1:8b --expensive-model qwen2.5-coder:7b-instruct
+    uv run model_router.py --eval-path finetune/dataset/eval.jsonl --cheap-model llama3.2:latest --expensive-model qwen2.5-coder:7b-instruct
 """
 
 from __future__ import annotations
@@ -45,14 +45,15 @@ SYSTEM_PROMPT: Final[str] = (
     "Отвечай только названием категории."
 )
 
-DEFAULT_CHEAP_MODEL: Final[str] = "llama3.1:8b"
+DEFAULT_CHEAP_MODEL: Final[str] = "llama3.2:latest"
 DEFAULT_EXPENSIVE_MODEL: Final[str] = "qwen2.5-coder:7b-instruct"
 DEFAULT_OLLAMA_URL: Final[str] = "http://localhost:11434"
 
 # Cost units (relative, not actual $)
-COST_UNITS: Final[dict[str, int]] = {
+# Ratio: 3B cheap vs 7B expensive = 1 : 2.3
+COST_UNITS: Final[dict[str, float]] = {
     "cheap": 1,
-    "expensive": 3,
+    "expensive": 2.3,
 }
 
 # ─── Data models ──────────────────────────────────────────────
@@ -118,7 +119,7 @@ def compute_confidence(
         >>> result = compute_confidence(
         ...     user_content="Отличная тачка для дачи",
         ...     answer="позитивный",
-        ...     model="llama3.1:8b"
+        ...     model="llama3.2:latest"
         ... )
         >>> print(result["confidence_status"])
         "HIGH"
@@ -215,13 +216,13 @@ def route_request(
 
     Example:
         >>> config = RouterConfig(
-        ...     cheap_model="llama3.1:8b",
+        ...     cheap_model="llama3.2:latest",
         ...     expensive_model="qwen2.5-coder:7b-instruct",
         ...     escalate_on=["MEDIUM", "LOW"]
         ... )
         >>> result = route_request("Отличная тачка!", config)
         >>> print(result.model_used)
-        "llama3.1:8b"  # or "qwen2.5-coder:7b-instruct" if escalated
+        "llama3.2:latest"  # or "qwen2.5-coder:7b-instruct" if escalated
         >>> print(result.escalated)
         False  # or True if escalated
     """

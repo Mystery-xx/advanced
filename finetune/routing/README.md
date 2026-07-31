@@ -44,10 +44,10 @@ Default configurationates on `MEDIUM` andLOW` confidence.
 Both models must be loaded in Ollama:
 
 ```bash
-# Default cheap model
-ollama pull llama3.1:8b
+# Default cheap model (3B parameters)
+ollama pull llama3.2:latest
 
-# Default expensive model
+# Default expensive model (7B parameters)
 ollama pull qwen2.5-coder:7b-instruct
 
 # Verify both are available
@@ -60,7 +60,7 @@ ollama list
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
-| `cheap_model` | `llama3.1:8b` | Fast model for initial classification |
+| `cheap_model` | `llama3.2:latest` (3B) | Fast model for initial classification |
 | `expensive_model` | `qwen2.5-coder:7b-instruct` | Accurate model for fallback |
 | `escalate_on` | `["MEDIUM", "LOW"]` | Confidence levels triggering escalation |
 | `use_self_check` | `True` | Enable self-check for confidence evaluation |
@@ -72,13 +72,13 @@ Relative cost units (not actual USD):
 
 | Model | Cost Units | Rationale |
 |-------|------------|-----------|
-| Cheap (llama3.1:8b) | 1 | Baseline cost |
-| Expensive (qwen2.5-coder:7b-instruct) | 3 | ~3× slower, more resources |
+| Cheap (llama3.2:latest — 3B) | 1 | Baseline cost |
+| Expensive (qwen2.5-coder:7b-instruct — 7B) | 2.3 | 7B / 3B ≈ 2.3× more resources |
 
 **Cost savings calculation:**
 ```
 Cost savings = (All expensive - Actual cost) / All expensive
-             = (3 × N - Σ actual_units) / (3 × N)
+             = (2.3 × N - Σ actual_units) / (2.3 × N)
 ```
 
 Where N is the total number of requests.
@@ -88,7 +88,7 @@ Where N is the total number of requests.
 ```bash
 # Custom models
 uv run model_router.py \
-  --cheap-model llama3.1:8b \
+  --cheap-model llama3.2:latest \
   --expensive-model qwen2.5-coder:7b-instruct
 
 # Custom escalation policy (escalate on LOW only)
@@ -125,7 +125,7 @@ uv run model_router.py --eval-path finetune/dataset/eval.jsonl
 ```bash
 uv run model_router.py \
   --eval-path finetune/dataset/eval.jsonl \
-  --cheap-model llama3.1:8b \
+  --cheap-model llama3.2:latest \
   --expensive-model qwen2.5-coder:7b-instruct \
   --escalate-on "MEDIUM,LOW" \
   --ollama-url http://localhost:11434
@@ -136,7 +136,7 @@ uv run model_router.py \
 ```
 ──────────────────────────── Model Routing Evaluation ────────────────────────────
 Ollama URL:      http://localhost:11434
-Cheap model:     llama3.1:8b
+Cheap model:     llama3.2:latest
 Expensive model: qwen2.5-coder:7b-instruct
 Escalate on:     MEDIUM, LOW
 Use self-check:  True
@@ -147,7 +147,7 @@ Loaded 20 examples
 ✓ Ollama running, models available
 
 Running routing evaluation...
-✓ # 1 ✓ Model: llama.1:b | Answer позитивный | Confidence: HIGH
+✓ # 1 ✓ Model: llama3.2:latest | Answer позитивный | Confidence: HIGH
 ✓ # 2 ✗ Model: qwen2.5-coder:7b-instruct (escalated) | Answer: негативный | Confidence: HIGH
 ...
 
@@ -157,10 +157,10 @@ Completed in 45.2s (2.26s per sample)
 Total samples:     20
 Escalation rate:   35.00%
 Avg latency:       2260.5 ms
-Avg cost units:    1.65
+Avg cost units:    1.46
 
 Confidence Distribution:
-  HIGH  : 1
+  HIGH  : 13
   MEDIUM: 0
   LOW   : 0
   ERROR : 0
@@ -194,10 +194,10 @@ Confidence Distribution:
 
 - 100 requests total
 - 65 handled by cheap model (65 cost units)
-- 35 escalated (35 × 3 = 105 cost units)
-- Total actual cost: 65 + 105 = 170 units
-- All-expensive cost: 100 × 3 = 300 units
-- **Cost savings: (300 - 17) / 300 = 43.3%**
+- 35 escalated (35 × 2.3 = 80.5 cost units)
+- Total actual cost: 65 + 80.5 = 145.5 units
+- All-expensive cost: 100 × 2.3 = 230 units
+- **Cost savings: (230 - 145.5) / 230 = 36.7%**
 
 ### Confidence Distribution
 
@@ -216,7 +216,7 @@ Results are saved to `routing_results.json`:
 
 ```json
 {
-  "cheap_model": "llama3.1:8b",
+  "cheap_model": "llama3.2:latest",
   "expensive_model": "qwen2.5-coder:7b-instruct",
   "escalate_on": ["MEDIUM", "LOW"],
   "use_self_check": true,
@@ -225,7 +225,7 @@ Results are saved to `routing_results.json`:
   "total_samples": 20,
   "escalation_rate": 0.35,
   "avg_latency_ms": 2260.5,
-  "avg_cost_units": 1.65,
+  "avg_cost_units": 1.46,
   "confidence_distribution": {
     "HIGH": 13,
     "MEDIUM": 0,
@@ -235,7 +235,7 @@ Results are saved to `routing_results.json`:
   "predictions": [
     {
       "answer": "позитивный",
-      "model_used": "llama3.1:8b",
+      "model_used": "llama3.2:latest",
       "confidence_status": "HIGH",
       "explanation": "Ответ содержит четкую категорию...",
       "constraint_passed": true,
@@ -266,7 +266,7 @@ curl http://localhost:11434/api/tags
 
 ```bash
 # Pull the missing model
-ollama pull llama3.1:8b
+ollama pull llama3.2:latest
 ollama pull qwen2.5-coder:7b-instruct
 
 # Verify availability
@@ -277,14 +277,14 @@ ollama list
 
 If most requests escalate to the expensive model:
 
-1. **Check cheap model quality**: Try a larger cheap model (e.g., `llama3.1:70b`)
+1. **Check cheap model quality**: Try a larger cheap model (e.g., `llama3.1:8b`)
 2. **Adjust escalation policy**: `--escalate-on LOW` (only escalate on LOW confidence)
 3. **Review confidence thresholds**: The self-check may be too strict for your use case
 
 ### Slow inference
 
-- **Cheap model latency**: Expected 500-2000ms for 8B model
-- **Expensive model latency**: Expected 2000-5000ms for 14B model
+- **Cheap model latency**: Expected 300-1000ms for 3B model
+- **Expensive model latency**: Expected 500-2000ms for 7B model
 - **Escalated requests**: Sum of both (cheap + expensive)
 
 ## Comparison with Other Modules
@@ -298,7 +298,7 @@ If most requests escalate to the expensive model:
 
 ## Best Practices
 
-1. **Start with defaults**: `llama3.1:8b` → `qwen2.5-coder:7b-instruct` works well for sentiment classification
+1. **Start with defaults**: `llama3.2:latest` → `qwen2.5-coder:7b-instruct` works well for sentiment classification
 2. **Monitor escalation rate**: Target 20-40% (cheap model handles 60-80% of requests)
 3. **Validate accuracy**: Compare routing accuracy vs. all-expensive baseline
 4. **Tune escalation policy**: Adjust based on cost/accuracy tradeoff requirements

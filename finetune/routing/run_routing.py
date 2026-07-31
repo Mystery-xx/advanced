@@ -17,7 +17,7 @@ then computes routing metrics (escalation rate, cost savings, latency stats).
 
 Usage:
     uv run run_routing.py --eval-path finetune/dataset/eval.jsonl
-    uv run run_routing.py --eval-path finetune/dataset/eval.jsonl --cheap-model llama3.1:8b --expensive-model qwen2.5-coder:7b-instruct
+    uv run run_routing.py --eval-path finetune/dataset/eval.jsonl --cheap-model llama3.2:latest --expensive-model qwen2.5-coder:7b-instruct
     uv run run_routing.py --eval-path finetune/dataset/eval.jsonl --escalate-on LOW --output /tmp/results.json
 """
 
@@ -408,7 +408,7 @@ def parse_args(args: list[str]) -> tuple[Path, RouterConfig, Path]:
         Tuple of (eval_path, config, output_path)
     """
     eval_path: Path | None = None
-    cheap_model: str = "llama3.1:8b"
+    cheap_model: str = "llama3.2:latest"
     expensive_model: str = "qwen2.5-coder:7b-instruct"
     escalate_on: list[str] = ["MEDIUM", "LOW"]
     use_self_check: bool = True
