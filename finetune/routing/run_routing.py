@@ -17,7 +17,7 @@ then computes routing metrics (escalation rate, cost savings, latency stats).
 
 Usage:
     uv run run_routing.py --eval-path finetune/dataset/eval.jsonl
-    uv run run_routing.py --eval-path finetune/dataset/eval.jsonl --cheap-model llama3.1:8b --expensive-model qwen3:14b
+    uv run run_routing.py --eval-path finetune/dataset/eval.jsonl --cheap-model llama3.1:8b --expensive-model qwen2.5-coder:7b-instruct
     uv run run_routing.py --eval-path finetune/dataset/eval.jsonl --escalate-on LOW --output /tmp/results.json
 """
 
@@ -200,8 +200,8 @@ def compute_routing_metrics(predictions: list[RoutingPrediction]) -> dict:
         confidence_counts[conf] = confidence_counts.get(conf, 0) + 1
 
     # Accuracy by model used
-    cheap_predictions = [p for p in predictions if p.model_used.endswith("8b") or "llama" in p.model_used.lower()]
-    expensive_predictions = [p for p in predictions if p.model_used.endswith("14b") or "qwen" in p.model_used.lower()]
+    cheap_predictions = [p for p in predictions if "llama" in p.model_used.lower()]
+    expensive_predictions = [p for p in predictions if "qwen" in p.model_used.lower() or "coder" in p.model_used.lower()]
 
     accuracy_by_model: dict[str, float] = {}
     if cheap_predictions:
@@ -409,7 +409,7 @@ def parse_args(args: list[str]) -> tuple[Path, RouterConfig, Path]:
     """
     eval_path: Path | None = None
     cheap_model: str = "llama3.1:8b"
-    expensive_model: str = "qwen3:14b"
+    expensive_model: str = "qwen2.5-coder:7b-instruct"
     escalate_on: list[str] = ["MEDIUM", "LOW"]
     use_self_check: bool = True
     ollama_url: str = "http://localhost:11434"
