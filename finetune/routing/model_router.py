@@ -258,6 +258,8 @@ def route_request(
         constraint_passed = False
 
     # Step 3: Decide whether to escalate
+    escalation_action = "ESCALATE" if confidence_status in ["MEDIUM", "LOW"] else "KEEP"
+    print(f"  [CONF] {confidence_status} → {escalation_action}")
     escalate = confidence_status in config.escalate_on
     cost_units = COST_UNITS["cheap"]
 
