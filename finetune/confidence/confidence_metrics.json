@@ -1,17 +1,17 @@
 {
-  "total_samples": 30,
-  "unsure_rate": 0.7,
-  "fail_rate": 0.6333333333333333,
-  "avg_latency_ms": 2429.1,
-  "token_overhead": 5671,
+  "total_samples": 10,
+  "unsure_rate": 0.6,
+  "fail_rate": 0.0,
+  "avg_latency_ms": 1814.3,
+  "token_overhead": 1050,
   "baseline_comparison": {
     "baseline_accuracy": 0.8,
-    "confidence_accuracy": 0.3,
-    "accuracy_difference": -0.5,
+    "confidence_accuracy": 0.7,
+    "accuracy_difference": -0.10000000000000009,
     "baseline_avg_latency_ms": null,
-    "confidence_avg_latency_ms": 2429.1,
+    "confidence_avg_latency_ms": 1814.3,
     "latency_overhead_ms": null,
     "baseline_samples": 20,
-    "confidence_samples": 30
+    "confidence_samples": 10
   }
 }
