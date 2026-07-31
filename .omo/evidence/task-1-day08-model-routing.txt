@@ -1,0 +1,21 @@
+# Task 1: Create finetune/routing/model_router.py
+# Date: 2026-07-31
+
+## Verification 1: Syntax Check
+Command: python3 -m py_compile finetune/routing/model_router.py
+Result: PASS (no output = no syntax errors)
+
+## Verification 2: Import Test
+Command: python3 -c "from finetune.routing.model_router import route_request, RouterConfig; print('OK')"
+Result: OK
+
+## File Contents Summary
+- RouterConfig dataclass with fields: cheap_model, expensive_model, escalate_on, use_self_check, ollama_url
+- RouterResult dataclass with fields: answer, model_used, confidence_status, explanation, constraint_passed, escalated, cheap_answer, cheap_confidence, latency_ms, cost_units
+- route_request() function implementing confidence-based routing
+- compute_confidence() function for confidence evaluation
+- Batch functions: run_routing_evaluation(), compute_routing_metrics(), print_routing_summary(), save_routing_results()
+- PEP 723 script header with dependencies: requests, rich, scikit-learn
+- Python 3.10+ syntax (dataclasses with slots, match statements)
+- Imports from finetune.confidence.constraint_check and finetune.confidence.self_check
+- Ollama HTTP API: http://localhost:11434/api/chat
