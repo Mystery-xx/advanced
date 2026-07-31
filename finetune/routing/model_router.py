@@ -46,7 +46,7 @@ SYSTEM_PROMPT: Final[str] = (
     "Отвечай только названием категории."
 )
 
-DEFAULT_CHEAP_MODEL: Final[str] = "llama3.2:1b"
+DEFAULT_CHEAP_MODEL: Final[str] = "llama3.1:8b"
 DEFAULT_EXPENSIVE_MODEL: Final[str] = "qwen3:14b"
 DEFAULT_OLLAMA_URL: Final[str] = "http://localhost:11434"
 
@@ -162,6 +162,10 @@ def compute_confidence(
             validation_passed = True  # Don't penalize on validation timeout
             validation_reason = f"Error in validation: {str(e)}"
             validation_latency = 0
+
+    # Debug: show validation outcome
+    print(f"    [VALIDATION] answer='{answer}' passed={validation_passed} "
+          f"status={'LOW' if not constraint_passed or not validation_passed else 'HIGH/MEDIUM'}")
 
     # Step 4: Compute confidence status
     # LOW: constraint failed OR answer validation failed

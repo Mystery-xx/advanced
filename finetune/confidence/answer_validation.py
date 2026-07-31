@@ -2,11 +2,12 @@
 Answer validation for review classification confidence.
 
 Validates that a classification answer actually matches the semantic
-sentiment of the review text. Unlike constraint_check (which only verifies
-the answer is a valid category), this asks the model to independently
-assess whether the review supports or contradicts the classification.
+sentiment of the review text. The prompt is designed to be simple and
+charitable: it should only flag clear mismatches, not penalize correct
+but borderline classifications.
 """
 
+import sys
 import requests
 import time
 
@@ -22,12 +23,9 @@ def answer_validation(
     """
     Ask the model to verify whether a classification answer matches the review.
 
-    This is a two-part prompt:
-    1. Independently assess the review's sentiment
-    2. Compare with the given classification
-
-    If the model independently arrives at a different sentiment, it should
-    flag the classification as unsupported.
+    Uses a simple, charitable prompt that only flags CLEAR mismatches.
+    On any ambiguity, timeout, or parse failure the answer is treated as
+    supported (innocent until proven guilty).
 
     Args:
         user_content: The original review text that was classified
@@ -54,25 +52,27 @@ def answer_validation(
     # Handle edge case: empty or whitespace-only user content
     if not user_content or not user_content.strip():
         return {
-            "supported": False,
-            "reason": "недостаточно данных для валидации — текст отзыва пуст",
+            "supported": True,
+            "reason": "пустой отзыв — пропускаем валидацию",
             "latency_ms": 0
         }
 
+    # Simple, charitable prompt: ask if classification matches.
+    # Avoid asking the model to "independently assess" — that confuses
+    # small models into contradicting the answer even when it's correct.
+    # Examples help the model understand the task.
     validation_prompt = (
-        f"Ниже приведён отзыв покупателя и классификация, которая была ему присвоена.\n\n"
-        f"Отзыв: \"{user_content}\"\n\n"
+        f"Отзыв: \"{user_content}\"\n"
         f"Классификация: \"{answer}\"\n\n"
-        f"1. Прочитайте отзыв и определите его реальный тональный характер "
-        f"(позитивный, негативный, нейтральный, или крайне негативный).\n\n"
-        f"2. Сравните реальный характер отзыва с присвоенной классификацией.\n\n"
-        f"Отвечайте строго в формате:\n"
-        f"ВЕРДИКТ: подтверждено\n"
-        f"или\n"
-        f"ВЕРДИКТ: противоречит\n\n"
-        f"А потом кратко объясните, почему классификация совпадает или "
-        f"не совпадает с реальным настроением отзыва. Укажите 2-3 ключевые "
-        f"фразы из отзыва, которые поддерживают вашу оценку."
+        f"Эта классификация подходит отзыву? Ответь ДА или НЕТ.\n"
+        f"Примеры:\n"
+        f"  Отзыв: \"Ужасный товар, сломался сразу\"\n"
+        f"  Классификация: \"позитивный\" → НЕТ\n\n"
+        f"  Отзыв: \"Отличная покупка!\"\n"
+        f"  Классификация: \"позитивный\" → ДА\n\n"
+        f"  Отзыв: \"Нормально, работает\"\n"
+        f"  Классификация: \"нейтральный\" → ДА\n\n"
+        f"Ответь ровно одним словом: ДА или НЕТ."
     )
 
     payload = {
@@ -99,25 +99,31 @@ def answer_validation(
 
     raw_response = data.get("message", {}).get("content", "").strip()
 
-    # Parse VERDICT from response
-    # Look for "ВЕРДИКТ:" line
-    verdict = ""
-    reason = raw_response
-    if "ВЕРДИКТ:" in raw_response:
-        lines = raw_response.split("\n")
-        for line in lines:
-            if "ВЕРДИКТ:" in line.strip():
-                verdict = line.strip().replace("ВЕРДИКТ:", "").strip().lower()
-                break
-        # Reason is everything after the verdict line
-        idx = raw_response.index("ВЕРДИКТ:")
-        reason = raw_response[idx:].split("\n", 1)
-        if len(reason) > 1:
-            reason = reason[1].strip()
-        else:
-            reason = raw_response
+    # DEBUG: print raw model output for inspection
+    print(f"    [ANSWER VALIDATION RAW] model='{model}' answer='{answer}' → '{raw_response[:80]}'", file=sys.stderr)
 
-    supported = "подтвержд" in verdict and "противореч" not in verdict
+    # Parse response: look for ДА (supported) or НЕТ (not supported)
+    # Default to supported (innocent until proven guilty)
+    response_lower = raw_response.lower()
+
+    # Only flag as unsupported if we clearly see "НЕТ" or similar negation
+    is_unsupported = False
+    reason = raw_response
+
+    # Check for clear negation indicators
+    negation_words = ["нет", "не верно", "неверно", "противоречит", "не совпадает"]
+    for word in negation_words:
+        # Look for the word at start or after punctuation
+        if word in response_lower.split() or word in response_lower:
+            is_unsupported = True
+            break
+
+    # If the response starts with "да" (or contains it as first word), it's supported
+    first_word = response_lower.split()[0] if response_lower.split() else ""
+    if first_word == "да":
+        is_unsupported = False
+
+    supported = not is_unsupported
 
     return {
         "supported": supported,

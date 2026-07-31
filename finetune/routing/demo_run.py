@@ -21,7 +21,7 @@ Usage:
 
 Requires:
     - Ollama running at http://localhost:11434
-    - Models: llama3.2:1b, qwen3:14b
+    - Models: llama3.1:8b, qwen3:14b
 """
 
 from __future__ import annotations
@@ -355,7 +355,7 @@ def save_results(results: list[DemoResult], output_path: Path) -> None:
     """Save results to JSON file."""
     output_data = {
         "config": {
-            "cheap_model": "llama3.2:1b",
+            "cheap_model": "llama3.1:8b",
             "expensive_model": "qwen3:14b",
             "escalate_on": ["MEDIUM", "LOW"],
         },
@@ -413,7 +413,7 @@ def main() -> int:
     console.print()
 
     config = RouterConfig(
-        cheap_model="llama3.2:1b",
+        cheap_model="llama3.1:8b",
         expensive_model="qwen3:14b",
     )
 

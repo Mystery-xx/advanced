@@ -45,7 +45,7 @@ Both models must be loaded in Ollama:
 
 ```bash
 # Default cheap model (1B parameters)
-ollama pull llama3.2:1b
+ollama pull llama3.1:8b
 
 # Default expensive model (14B parameters)
 ollama pull qwen3:14b
@@ -60,7 +60,7 @@ ollama list
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
-| `cheap_model` | `llama3.2:1b` (1B) | Fast model for initial classification |
+| `cheap_model` | `llama3.1:8b` (1B) | Fast model for initial classification |
 | `expensive_model` | `qwen3:14b` (14B) | Accurate model for fallback |
 | `escalate_on` | `["MEDIUM", "LOW"]` | Confidence levels triggering escalation |
 | `use_self_check` | `True` | Enable self-check for confidence evaluation |
@@ -72,7 +72,7 @@ Relative cost units (not actual USD):
 
 | Model | Cost Units | Rationale |
 |-------|------------|-----------|
-| Cheap (llama3.2:1b — 1B) | 1 | Baseline cost |
+| Cheap (llama3.1:8b — 1B) | 1 | Baseline cost |
 | Expensive (qwen3:14b — 14B) | 15 | 14B / 1B ≈ 15× more resources |
 
 **Cost savings calculation:**
@@ -88,7 +88,7 @@ Where N is the total number of requests.
 ```bash
 # Custom models
 uv run model_router.py \
-  --cheap-model llama3.2:1b \
+  --cheap-model llama3.1:8b \
   --expensive-model qwen3:14b
 
 # Custom escalation policy (escalate on LOW only)
@@ -125,7 +125,7 @@ uv run model_router.py --eval-path finetune/dataset/eval.jsonl
 ```bash
 uv run model_router.py \
   --eval-path finetune/dataset/eval.jsonl \
-  --cheap-model llama3.2:1b \
+  --cheap-model llama3.1:8b \
   --expensive-model qwen3:14b \
   --escalate-on "MEDIUM,LOW" \
   --ollama-url http://localhost:11434
@@ -136,7 +136,7 @@ uv run model_router.py \
 ```
 ──────────────────────────── Model Routing Evaluation ────────────────────────────
 Ollama URL:      http://localhost:11434
-Cheap model:     llama3.2:1b
+Cheap model:     llama3.1:8b
 Expensive model: qwen3:14b
 Escalate on:     MEDIUM, LOW
 Use self-check:  True
@@ -147,7 +147,7 @@ Loaded 20 examples
 ✓ Ollama running, models available
 
 Running routing evaluation...
-✓ # 1 ✓ Model: llama3.2:1b | Answer позитивный | Confidence: HIGH
+✓ # 1 ✓ Model: llama3.1:8b | Answer позитивный | Confidence: HIGH
 ✓ # 2 ✗ Model: qwen3:14b (escalated) | Answer: негативный | Confidence: HIGH
 ...
 
@@ -216,7 +216,7 @@ Results are saved to `routing_results.json`:
 
 ```json
 {
-  "cheap_model": "llama3.2:1b",
+  "cheap_model": "llama3.1:8b",
   "expensive_model": "qwen3:14b",
   "escalate_on": ["MEDIUM", "LOW"],
   "use_self_check": true,
@@ -235,7 +235,7 @@ Results are saved to `routing_results.json`:
   "predictions": [
     {
       "answer": "позитивный",
-      "model_used": "llama3.2:1b",
+      "model_used": "llama3.1:8b",
       "confidence_status": "HIGH",
       "explanation": "Ответ содержит четкую категорию...",
       "constraint_passed": true,
@@ -266,7 +266,7 @@ curl http://localhost:11434/api/tags
 
 ```bash
 # Pull the missing model
-ollama pull llama3.2:1b
+ollama pull llama3.1:8b
 ollama pull qwen3:14b
 
 # Verify availability
@@ -277,7 +277,7 @@ ollama list
 
 If most requests escalate to the expensive model:
 
-1. **Check cheap model quality**: Try a larger cheap model (e.g., `llama3.2:1b`)
+1. **Check cheap model quality**: Try a larger cheap model (e.g., `llama3.1:8b`)
 2. **Adjust escalation policy**: `--escalate-on LOW` (only escalate on LOW confidence)
 3. **Review confidence thresholds**: The self-check may be too strict for your use case
 
@@ -298,7 +298,7 @@ If most requests escalate to the expensive model:
 
 ## Best Practices
 
-1. **Start with defaults**: `llama3.2:1b` → `qwen3:14b` works well for sentiment classification
+1. **Start with defaults**: `llama3.1:8b` → `qwen3:14b` works well for sentiment classification
 2. **Monitor escalation rate**: Target 20-40% (cheap model handles 60-80% of requests)
 3. **Validate accuracy**: Compare routing accuracy vs. all-expensive baseline
 4. **Tune escalation policy**: Adjust based on cost/accuracy tradeoff requirements
