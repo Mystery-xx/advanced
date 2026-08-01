@@ -1,0 +1,1259 @@
+{
+  "monolithic": {
+    "accuracy": 0.4,
+    "avg_latency_ms": 1500.0,
+    "total_cost": 25.0,
+    "predictions": [
+      {
+        "index": 0,
+        "predicted": "негативный",
+        "actual": "нейтральный",
+        "correct": false,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "негативный"
+        }
+      },
+      {
+        "index": 1,
+        "predicted": "нейтральный",
+        "actual": "негативный",
+        "correct": false,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "нейтральный"
+        }
+      },
+      {
+        "index": 2,
+        "predicted": "нейтральный",
+        "actual": "негативный",
+        "correct": false,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "нейтральный"
+        }
+      },
+      {
+        "index": 3,
+        "predicted": "позитивный",
+        "actual": "позитивный",
+        "correct": true,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "позитивный"
+        }
+      },
+      {
+        "index": 4,
+        "predicted": "позитивный",
+        "actual": "позитивный",
+        "correct": true,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "позитивный"
+        }
+      },
+      {
+        "index": 5,
+        "predicted": "крайне негативный",
+        "actual": "крайне негативный",
+        "correct": true,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "крайне негативный"
+        }
+      },
+      {
+        "index": 6,
+        "predicted": "нейтральный",
+        "actual": "нейтральный",
+        "correct": true,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "нейтральный"
+        }
+      },
+      {
+        "index": 7,
+        "predicted": "позитивный",
+        "actual": "позитивный",
+        "correct": true,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "позитивный"
+        }
+      },
+      {
+        "index": 8,
+        "predicted": "нейтральный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "нейтральный"
+        }
+      },
+      {
+        "index": 9,
+        "predicted": "позитивный",
+        "actual": "нейтральный",
+        "correct": false,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "позитивный"
+        }
+      },
+      {
+        "index": 10,
+        "predicted": "позитивный",
+        "actual": "позитивный",
+        "correct": true,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "позитивный"
+        }
+      },
+      {
+        "index": 11,
+        "predicted": "нейтральный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "нейтральный"
+        }
+      },
+      {
+        "index": 12,
+        "predicted": "нейтральный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "нейтральный"
+        }
+      },
+      {
+        "index": 13,
+        "predicted": "нейтральный",
+        "actual": "негативный",
+        "correct": false,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "нейтральный"
+        }
+      },
+      {
+        "index": 14,
+        "predicted": "нейтральный",
+        "actual": "негативный",
+        "correct": false,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "нейтральный"
+        }
+      },
+      {
+        "index": 15,
+        "predicted": "позитивный",
+        "actual": "негативный",
+        "correct": false,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "позитивный"
+        }
+      },
+      {
+        "index": 16,
+        "predicted": "нейтральный",
+        "actual": "позитивный",
+        "correct": false,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "нейтральный"
+        }
+      },
+      {
+        "index": 17,
+        "predicted": "нейтральный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "нейтральный"
+        }
+      },
+      {
+        "index": 18,
+        "predicted": "нейтральный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "нейтральный"
+        }
+      },
+      {
+        "index": 19,
+        "predicted": "позитивный",
+        "actual": "позитивный",
+        "correct": true,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "позитивный"
+        }
+      },
+      {
+        "index": 20,
+        "predicted": "нейтральный",
+        "actual": "нейтральный",
+        "correct": true,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "нейтральный"
+        }
+      },
+      {
+        "index": 21,
+        "predicted": "нейтральный",
+        "actual": "нейтральный",
+        "correct": true,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "нейтральный"
+        }
+      },
+      {
+        "index": 22,
+        "predicted": "нейтральный",
+        "actual": "нейтральный",
+        "correct": true,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "нейтральный"
+        }
+      },
+      {
+        "index": 23,
+        "predicted": "позитивный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "позитивный"
+        }
+      },
+      {
+        "index": 24,
+        "predicted": "нейтральный",
+        "actual": "негативный",
+        "correct": false,
+        "latency_ms": 1500.0,
+        "cost": 1.0,
+        "metadata": {
+          "raw_predicted": "нейтральный"
+        }
+      }
+    ]
+  },
+  "multi_stage_local": {
+    "accuracy": 0.24,
+    "avg_latency_ms": 800.0,
+    "total_cost": 15.0,
+    "predictions": [
+      {
+        "index": 0,
+        "predicted": "крайне негативный",
+        "actual": "нейтральный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.9,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 1,
+        "predicted": "нейтральный",
+        "actual": "негативный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.5,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 2,
+        "predicted": "крайне негативный",
+        "actual": "негативный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.9,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 3,
+        "predicted": "позитивный",
+        "actual": "позитивный",
+        "correct": true,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.8,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 4,
+        "predicted": "нейтральный",
+        "actual": "позитивный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.9,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 5,
+        "predicted": "нейтральный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.6,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 6,
+        "predicted": "нейтральный",
+        "actual": "нейтральный",
+        "correct": true,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.9,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 7,
+        "predicted": "нейтральный",
+        "actual": "позитивный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.6,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 8,
+        "predicted": "нейтральный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.5,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 9,
+        "predicted": "позитивный",
+        "actual": "нейтральный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.9,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 10,
+        "predicted": "нейтральный",
+        "actual": "позитивный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.9,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 11,
+        "predicted": "нейтральный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.9,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 12,
+        "predicted": "нейтральный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.9,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 13,
+        "predicted": "нейтральный",
+        "actual": "негативный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.5,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 14,
+        "predicted": "нейтральный",
+        "actual": "негативный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.5,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 15,
+        "predicted": "нейтральный",
+        "actual": "негативный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.6,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 16,
+        "predicted": "нейтральный",
+        "actual": "позитивный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.9,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 17,
+        "predicted": "нейтральный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.9,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 18,
+        "predicted": "нейтральный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.9,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 19,
+        "predicted": "позитивный",
+        "actual": "позитивный",
+        "correct": true,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.8,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 20,
+        "predicted": "нейтральный",
+        "actual": "нейтральный",
+        "correct": true,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.9,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 21,
+        "predicted": "нейтральный",
+        "actual": "нейтральный",
+        "correct": true,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.9,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 22,
+        "predicted": "нейтральный",
+        "actual": "нейтральный",
+        "correct": true,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.9,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 23,
+        "predicted": "негативный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.8,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 24,
+        "predicted": "крайне негативный",
+        "actual": "негативный",
+        "correct": false,
+        "latency_ms": 800.0,
+        "cost": 0.6,
+        "metadata": {
+          "confidence": 0.9,
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      }
+    ]
+  },
+  "multi_stage_hybrid": {
+    "accuracy": 0.24,
+    "avg_latency_ms": 2500.0,
+    "total_cost": 30.0,
+    "predictions": [
+      {
+        "index": 0,
+        "predicted": "крайне негативный",
+        "actual": "нейтральный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.9,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 1,
+        "predicted": "нейтральный",
+        "actual": "негативный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.5,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 2,
+        "predicted": "крайне негативный",
+        "actual": "негативный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.9,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 3,
+        "predicted": "позитивный",
+        "actual": "позитивный",
+        "correct": true,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.8,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 4,
+        "predicted": "нейтральный",
+        "actual": "позитивный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.9,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 5,
+        "predicted": "нейтральный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.6,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 6,
+        "predicted": "нейтральный",
+        "actual": "нейтральный",
+        "correct": true,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.9,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 7,
+        "predicted": "нейтральный",
+        "actual": "позитивный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.6,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 8,
+        "predicted": "нейтральный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.5,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 9,
+        "predicted": "позитивный",
+        "actual": "нейтральный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.9,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 10,
+        "predicted": "нейтральный",
+        "actual": "позитивный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.9,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 11,
+        "predicted": "нейтральный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.9,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 12,
+        "predicted": "нейтральный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.9,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 13,
+        "predicted": "нейтральный",
+        "actual": "негативный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.5,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 14,
+        "predicted": "нейтральный",
+        "actual": "негативный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.5,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 15,
+        "predicted": "нейтральный",
+        "actual": "негативный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.6,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 16,
+        "predicted": "нейтральный",
+        "actual": "позитивный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.9,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 17,
+        "predicted": "нейтральный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.9,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 18,
+        "predicted": "нейтральный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.9,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 19,
+        "predicted": "позитивный",
+        "actual": "позитивный",
+        "correct": true,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.8,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 20,
+        "predicted": "нейтральный",
+        "actual": "нейтральный",
+        "correct": true,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.9,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 21,
+        "predicted": "нейтральный",
+        "actual": "нейтральный",
+        "correct": true,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.9,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 22,
+        "predicted": "нейтральный",
+        "actual": "нейтральный",
+        "correct": true,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.9,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 23,
+        "predicted": "негативный",
+        "actual": "крайне негативный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.8,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      },
+      {
+        "index": 24,
+        "predicted": "крайне негативный",
+        "actual": "негативный",
+        "correct": false,
+        "latency_ms": 2500.0,
+        "cost": 1.2,
+        "metadata": {
+          "confidence": 0.9,
+          "error": null,
+          "sources": {
+            "stage1": "ollama",
+            "stage2": "ollama",
+            "stage3": "gpustack"
+          },
+          "stages": {
+            "stage1": "success",
+            "stage2": "success",
+            "stage3": "success"
+          }
+        }
+      }
+    ]
+  },
+  "comparison": {
+    "accuracy_winner": "monolithic",
+    "latency_winner": "multi_stage_local",
+    "cost_winner": "multi_stage_local",
+    "total_examples": 25,
+    "agreement_rate": {
+      "mono_local": 0.64,
+      "mono_hybrid": 0.64,
+      "local_hybrid": 1.0
+    }
+  }
+}
