@@ -1,0 +1,34 @@
+{"query": "Отличный товар, рекомендую!", "expected_label": "позитивный", "category": "simple"}
+{"query": "Ужасное качество, полный брак", "expected_label": "крайне негативный", "category": "simple"}
+{"query": "Неплохой вариант за свои деньги", "expected_label": "нейтральный", "category": "simple"}
+{"query": "Всё работает отлично, спасибо продавцу", "expected_label": "позитивный", "category": "simple"}
+{"query": "Полное разочарование, деньги на ветер", "expected_label": "крайне негативный", "category": "simple"}
+{"query": "Доставка задержалась на три дня", "expected_label": "негативный", "category": "simple"}
+{"query": "Хороший продукт, буду заказывать ещё", "expected_label": "позитивный", "category": "simple"}
+{"query": "Товар соответствует описанию", "expected_label": "нейтральный", "category": "simple"}
+{"query": "Качество отвратительное, не советую никому", "expected_label": "крайне негативный", "category": "simple"}
+{"query": "Цена немного завышена для такого качества", "expected_label": "негативный", "category": "simple"}
+{"query": "Прекрасный сервис и быстрая доставка", "expected_label": "позитивный", "category": "simple"}
+{"query": "Средний товар, своих денег стоит", "expected_label": "нейтральный", "category": "simple"}
+{"query": "Хуже не может быть — сломалось при первом использовании", "expected_label": "крайне негативный", "category": "simple"}
+{"query": "Долго ждал заказ, качество так себе", "expected_label": "негативный", "category": "simple"}
+{"query": "Лучшая покупка в этом году, всем доволен", "expected_label": "позитивный", "category": "simple"}
+{"query": "", "expected_label": "нейтральный", "category": "edge"}
+{"query": "   ", "expected_label": "нейтральный", "category": "edge"}
+{"query": "asdfghjkl123", "expected_label": "нейтральный", "category": "edge"}
+{"query": "👍👍👍", "expected_label": "позитивный", "category": "edge"}
+{"query": "н", "expected_label": "нейтральный", "category": "edge"}
+{"query": "😡😡😡", "expected_label": "крайне негативный", "category": "edge"}
+{"query": "Тачка супер, but fast shipping доставка", "expected_label": "позитивный", "category": "edge"}
+{"query": "😊👍 Отлично! 👌🔥", "expected_label": "позитивный", "category": "edge"}
+{"query": "норм", "expected_label": "нейтральный", "category": "edge"}
+{"query": "НЕ РАБОТАЕТ!!!111", "expected_label": "крайне негативный", "category": "edge"}
+{"query": "qwerty", "expected_label": "нейтральный", "category": "edge"}
+{"query": "Сначала понравилось, но через неделю сломалось. Хотя поддержка вернула деньги.", "expected_label": "нейтральный", "category": "hard"}
+{"query": "Для такой цены — нормально, но чудес не ждите", "expected_label": "нейтральный", "category": "hard"}
+{"query": "Ой, ну такое себе. Хотя, если честно, неплохо. А впрочем, не знаю.", "expected_label": "нейтральный", "category": "hard"}
+{"query": "Вроде бы хорошо, но есть нюансы. С одной стороны работает, с другой — вечно что-то отваливается.", "expected_label": "негативный", "category": "hard"}
+{"query": "Как же мне это надоело. Но работает отлично, спасибо разработчикам!", "expected_label": "позитивный", "category": "hard"}
+{"query": "Сломалось, конечно, сразу. Зато поддержка быстро ответила, прислали замену за свой счёт.", "expected_label": "нейтральный", "category": "hard"}
+{"query": "Лучший сервис, который я когда-либо видел — если вам нравится ждать по три часа и получать брак", "expected_label": "крайне негативный", "category": "hard"}
+{"query": "Просто шикарно! Ну почти... Немного не хватает, но в целом норм", "expected_label": "нейтральный", "category": "hard"}
